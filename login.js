@@ -1,3 +1,7 @@
+//Changes made to the original code:
+// 1.  Client-side Email & Password Validation   
+// 2. Clear Password Fields on Failed Login/Signup
+// 3. Show Feedback After Logout
 
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
@@ -6,22 +10,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const logoutButton = document.getElementById('logoutButton');
     const loginButton = document.getElementById('loginButton');
 
-    
+    // Email and password validation functions
+    function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    function validatePassword(password) {
+        return password.length >= 6;
+    }
+
     function checkLoggedIn() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {
-
             loginButton.style.display = 'none';
             document.body.classList.add('logged-in');
             if (logoutButton) {
                 logoutButton.style.display = 'block';
             }
-            
             if (window.location.pathname.includes('login.html') || window.location.pathname.includes('signup.html')) {
                 window.location.href = 'index.html';
             }
         } else {
-            
             document.body.classList.remove('logged-in');
             if (logoutButton) {
                 loginButton.style.display = 'block';
@@ -30,10 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    
     checkLoggedIn();
 
-    
     document.querySelectorAll('.toggle-password').forEach(icon => {
         icon.addEventListener('click', function() {
             const input = this.previousElementSibling;
@@ -47,12 +53,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
+            // Client-side validation
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address.', false);
+                document.getElementById('password').value = '';
+                return;
+            }
+            if (!validatePassword(password)) {
+                showMessage('Password must be at least 6 characters.', false);
+                document.getElementById('password').value = '';
+                return;
+            }
+
             const users = JSON.parse(localStorage.getItem('users')) || [];
             const user = users.find(u => u.email === email && u.password === password);
 
@@ -66,11 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 showMessage('Invalid email or password', false);
                 loginForm.classList.add('shake');
                 setTimeout(() => loginForm.classList.remove('shake'), 600);
+                document.getElementById('password').value = '';
             }
         });
     }
 
-    
     if (signupForm) {
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -79,8 +97,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
+            // Client-side validation
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address.', false);
+                document.getElementById('password').value = '';
+                document.getElementById('confirmPassword').value = '';
+                return;
+            }
+            if (!validatePassword(password)) {
+                showMessage('Password must be at least 6 characters.', false);
+                document.getElementById('password').value = '';
+                document.getElementById('confirmPassword').value = '';
+                return;
+            }
+
             if (password !== confirmPassword) {
                 showMessage('Passwords do not match', false);
+                document.getElementById('password').value = '';
+                document.getElementById('confirmPassword').value = '';
                 return;
             }
 
@@ -88,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (users.some(user => user.email === email)) {
                 showMessage('Email already registered', false);
+                document.getElementById('password').value = '';
+                document.getElementById('confirmPassword').value = '';
                 return;
             }
 
@@ -99,12 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
     if (logoutButton) {
         logoutButton.addEventListener('click', function() {
             localStorage.removeItem('currentUser');
             checkLoggedIn();
-            window.location.href = 'login.html';
+            showMessage('You have been logged out.', true);
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1200);
         });
     }
 
@@ -113,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
             messageElement.textContent = message;
             messageElement.className = isSuccess ? 'message success-message' : 'message error-message';
             messageElement.classList.add('show-message');
-
             setTimeout(() => {
                 messageElement.classList.remove('show-message');
             }, 3000);
