@@ -1,0 +1,19 @@
+name: Show My Contributions
+
+on:
+  push:
+    branches: [ main ]   # Trigger on push to main
+  workflow_dispatch:      # Allow manual run
+
+jobs:
+  log-committer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Show Commit Author and Message
+        run: |
+          echo "Last commit by: ${{ github.actor }}"
+          git log -1 --pretty=format:"%h - %an: %s"
