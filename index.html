@@ -23,6 +23,7 @@
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#profile-section" id="profileNavLink">Profile</a></li>
             </ul>
             <div class="auth-buttons">
                 <a href="./login.html" id="loginButton">
@@ -270,6 +271,36 @@
                 </div>
             </div>
         </section>
+
+        <section id="profile-section" class="profile-section" style="display:none;">
+            <div class="profile-container">
+                <img src="default-avatar.png" alt="Avatar" class="profile-avatar" id="avatarImg">
+                <div class="profile-info">
+                    <h2 id="profileName">User Name</h2>
+                    <p id="profileEmail"><i class="fas fa-envelope"></i> user@example.com</p>
+                    <p id="profileDate"><i class="fas fa-calendar-alt"></i> Joined: --</p>
+                    <p id="profileDOB"><i class="fas fa-birthday-cake"></i> Date of Birth: --</p>
+                    <p id="profileAge"><i class="fas fa-user"></i> Age: --</p>
+                    <p id="profileCountry"><i class="fas fa-flag"></i> Country: --</p>
+                    <p id="profileCity"><i class="fas fa-city"></i> City: --</p>
+                </div>
+                <div class="profile-actions">
+                    <button id="editBtn">Edit Profile</button>
+                    <button class="logout" id="logoutBtnProfile">Logout</button>
+                </div>
+                <div class="edit-section" id="editSection" style="display:none;">
+                    <input type="text" id="editName" placeholder="Enter new name">
+                    <input type="email" id="editEmail" placeholder="Enter new email">
+                    <input type="date" id="editDOB" placeholder="Date of Birth">
+                    <input type="number" id="editAge" placeholder="Age" min="1" max="120">
+                    <input type="text" id="editCountry" placeholder="Country">
+                    <input type="text" id="editCity" placeholder="City">
+                    <button id="saveBtn">Save Changes</button>
+                    <button id="cancelBtn" style="background:#6c757d;">Cancel</button>
+                </div>
+                <div class="message" id="profileMsg"></div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -338,5 +369,282 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
     <script src="login.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Profile navigation
+    const profileNavLink = document.getElementById('profileNavLink');
+    const profileSection = document.getElementById('profile-section');
+    const mainSections = document.querySelectorAll('main > section');
+
+    if (profileNavLink) {
+        profileNavLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Hide all main sections
+            mainSections.forEach(sec => sec.style.display = 'none');
+            // Show profile section
+            profileSection.style.display = 'block';
+            window.scrollTo(0, profileSection.offsetTop);
+            loadProfile();
+        });
+    }
+
+    // Profile logic
+    function loadProfile() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const profileName = document.getElementById('profileName');
+        const profileEmail = document.getElementById('profileEmail');
+        const profileDate = document.getElementById('profileDate');
+        const profileDOB = document.getElementById('profileDOB');
+        const profileAge = document.getElementById('profileAge');
+        const profileCountry = document.getElementById('profileCountry');
+        const profileCity = document.getElementById('profileCity');
+        const avatarImg = document.getElementById('avatarImg');
+        const editBtn = document.getElementById('editBtn');
+        const logoutBtn = document.getElementById('logoutBtnProfile');
+        const editSection = document.getElementById('editSection');
+        const editName = document.getElementById('editName');
+        const editEmail = document.getElementById('editEmail');
+        const editDOB = document.getElementById('editDOB');
+        const editAge = document.getElementById('editAge');
+        const editCountry = document.getElementById('editCountry');
+        const editCity = document.getElementById('editCity');
+        const saveBtn = document.getElementById('saveBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const profileMsg = document.getElementById('profileMsg');
+
+        if (!currentUser) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        profileName.textContent = currentUser.name || "User Name";
+        profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + (currentUser.email || "user@example.com");
+        profileDate.innerHTML = '<i class="fas fa-calendar-alt"></i> Joined: ' + (currentUser.registrationDate ? new Date(currentUser.registrationDate).toLocaleDateString() : "--");
+        profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (currentUser.dob || "--");
+        profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (currentUser.age || "--");
+        profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (currentUser.country || "--");
+        profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (currentUser.city || "--");
+
+        editBtn.onclick = function() {
+            editSection.style.display = "block";
+            editName.value = currentUser.name || "";
+            editEmail.value = currentUser.email || "";
+            editDOB.value = currentUser.dob || "";
+            editAge.value = currentUser.age || "";
+            editCountry.value = currentUser.country || "";
+            editCity.value = currentUser.city || "";
+            profileMsg.textContent = "";
+            profileMsg.style.color = "#28a745";
+        };
+
+        cancelBtn.onclick = function() {
+            editSection.style.display = "none";
+            profileMsg.textContent = "";
+        };
+
+        saveBtn.onclick = function() {
+            const newName = editName.value.trim();
+            const newEmail = editEmail.value.trim();
+            const newDOB = editDOB.value;
+            const newAge = editAge.value.trim();
+            const newCountry = editCountry.value.trim();
+            const newCity = editCity.value.trim();
+
+            if (!newName || !newEmail) {
+                profileMsg.style.color = "#dc3545";
+                profileMsg.textContent = "Name and email cannot be empty.";
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+                profileMsg.style.color = "#dc3545";
+                profileMsg.textContent = "Invalid email format.";
+                return;
+            }
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.some(u => u.email === newEmail && u.email !== currentUser.email)) {
+                profileMsg.style.color = "#dc3545";
+                profileMsg.textContent = "Email already in use.";
+                return;
+            }
+            users = users.map(u => {
+                if (u.email === currentUser.email) {
+                    return { 
+                        ...u, 
+                        name: newName, 
+                        email: newEmail, 
+                        dob: newDOB, 
+                        age: newAge, 
+                        country: newCountry, 
+                        city: newCity 
+                    };
+                }
+                return u;
+            });
+            localStorage.setItem('users', JSON.stringify(users));
+            const updatedUser = { 
+                ...currentUser, 
+                name: newName, 
+                email: newEmail, 
+                dob: newDOB, 
+                age: newAge, 
+                country: newCountry, 
+                city: newCity 
+            };
+            localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+            profileName.textContent = newName;
+            profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + newEmail;
+            profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (newDOB || "--");
+            profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (newAge || "--");
+            profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (newCountry || "--");
+            profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (newCity || "--");
+            profileMsg.style.color = "#28a745";
+            profileMsg.textContent = "Profile updated successfully!";
+            editSection.style.display = "none";
+        };
+
+        logoutBtn.onclick = function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = "login.html";
+        };
+    }
+
+    // Enable navigation back to other sections from Profile
+    const navLinks = document.querySelectorAll('.nav-links a:not(#profileNavLink)');
+    const profileSection = document.getElementById('profile-section');
+    const mainSections = document.querySelectorAll('main > section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Get the target section ID from href (e.g., #home)
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                // Hide profile section
+                profileSection.style.display = 'none';
+                // Show the target section
+                mainSections.forEach(sec => {
+                    if ('#' + sec.id === targetId) {
+                        sec.style.display = 'block';
+                        window.scrollTo(0, sec.offsetTop);
+                    } else if (sec.id !== 'profile-section') {
+                        sec.style.display = 'block';
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
+
+<style>
+/* Add this CSS at the end of your style.css or inside a <style> tag in index.html */
+.profile-section {
+    background: #f4f7fa;
+    padding: 40px 0;
+}
+.profile-container {
+    max-width: 420px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 36px 28px 28px 28px;
+    position: relative;
+    transition: box-shadow 0.2s;
+}
+.profile-container:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 18px;
+    display: block;
+    border: 3px solid #007bff;
+    background: #e9ecef;
+}
+.profile-info {
+    text-align: center;
+    margin-bottom: 18px;
+}
+.profile-info h2 {
+    margin: 0 0 10px;
+    color: #222;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.profile-info p {
+    margin: 6px 0;
+    color: #444;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+.profile-actions {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+}
+.profile-actions button {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    background: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.profile-actions button.logout {
+    background: #dc3545;
+}
+.profile-actions button:hover {
+    opacity: 0.93;
+}
+.edit-section {
+    margin-top: 22px;
+    display: none;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 18px 12px 12px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.edit-section input {
+    width: 100%;
+    padding: 9px 10px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border: 1px solid #bfc9d1;
+    font-size: 1rem;
+    background: #fff;
+    transition: border 0.2s;
+}
+.edit-section input:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+}
+.message {
+    text-align: center;
+    margin-top: 12px;
+    color: #28a745;
+    font-weight: 500;
+    font-size: 1.08rem;
+}
+@media (max-width: 600px) {
+    .profile-container {
+        padding: 18px 4px 18px 4px;
+    }
+    .profile-section {
+        padding: 18px 0;
+    }
+}
+</style>
+
 </body>
 </html>
