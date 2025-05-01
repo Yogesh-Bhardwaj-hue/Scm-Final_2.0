@@ -3,34 +3,41 @@ name: Update Contributors Graph
 on:
   push:
     branches: [ main ]
-  schedule:
-    - cron: '0 0 * * *'  # Daily update
   workflow_dispatch:
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Fetch all history for contribution data
+          fetch-depth: 0  # Get full history
       
       - name: Generate Contribution Stats
         run: |
           # Create a temporary file for statistics
           echo "# Contribution Statistics" > stats.md
           echo "" >> stats.md
-          echo "## Total Contributions" >> stats.md
+          
+          # Add a visual contributor chart
+          echo "## Visual Contribution Chart" >> stats.md
+          echo "" >> stats.md
+          echo "[![Contributors](https://contrib.rocks/image?repo=${GITHUB_REPOSITORY})](https://github.com/${GITHUB_REPOSITORY}/graphs/contributors)" >> stats.md
+          echo "" >> stats.md
+          
+          # Add the table as before
+          echo "## Detailed Contributions" >> stats.md
           echo "" >> stats.md
           echo "| Contributor | Commits | Additions | Deletions |" >> stats.md
           echo "|-------------|---------|-----------|-----------|" >> stats.md
           
-          # Get list of contributors
+          # Get list of ALL contributors including those with access listed in GitHub
           CONTRIBUTORS=$(git log --format='%an' | sort -u)
           
-          # Generate stats for each contributor
           for contributor in $CONTRIBUTORS; do
             commits=$(git log --author="$contributor" --oneline | wc -l)
             additions=$(git log --author="$contributor" --stat | grep -o '[0-9]* insertion' | awk '{s+=$1} END {print s}')
@@ -49,7 +56,6 @@ jobs:
       
       - name: Update README with Stats
         run: |
-          # Use awk instead of sed for more reliable multiline replacement
           awk '
           BEGIN { p=1 }
           /<!-- CONTRIBUTION-STATS:START -->/ { print; p=0; system("cat stats.md") }

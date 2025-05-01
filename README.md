@@ -143,10 +143,11 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 ---
 
 ## Contributing
-           - Garv Mehra
-           - Yogesh Bhardwaj
-           - sarthak Aggarwal
-           - Harshit Garg
+
+- Garv Mehra
+- Yogesh Bhardwaj
+- Sarthak Aggarwal
+- Harshit Garg
 
 <!-- CONTRIBUTION-STATS:START -->
 <!-- CONTRIBUTION-STATS:END -->
