@@ -5,12 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileName = document.getElementById('profileName');
     const profileEmail = document.getElementById('profileEmail');
     const profileDate = document.getElementById('profileDate');
+    const profileDOB = document.getElementById('profileDOB');
+    const profileAge = document.getElementById('profileAge');
+    const profileCountry = document.getElementById('profileCountry');
+    const profileCity = document.getElementById('profileCity');
     const avatarImg = document.getElementById('avatarImg');
     const editBtn = document.getElementById('editBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutBtn = document.getElementById('logoutBtnProfile');
     const editSection = document.getElementById('editSection');
     const editName = document.getElementById('editName');
     const editEmail = document.getElementById('editEmail');
+    const editDOB = document.getElementById('editDOB');
+    const editAge = document.getElementById('editAge');
+    const editCountry = document.getElementById('editCountry');
+    const editCity = document.getElementById('editCity');
     const saveBtn = document.getElementById('saveBtn');
     const cancelBtn = document.getElementById('cancelBtn');
     const profileMsg = document.getElementById('profileMsg');
@@ -20,16 +28,26 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Display current user info
-    profileName.textContent = currentUser.name || "User Name";
-    profileEmail.textContent = currentUser.email || "user@example.com";
-    profileDate.textContent = "Joined: " + (currentUser.registrationDate ? new Date(currentUser.registrationDate).toLocaleDateString() : "--");
-    // If you have avatar support, set avatarImg.src = currentUser.avatarUrl
+    function renderProfile(user) {
+        profileName.textContent = user.name || "User Name";
+        profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + (user.email || "user@example.com");
+        profileDate.innerHTML = '<i class="fas fa-calendar-alt"></i> Joined: ' + (user.registrationDate ? new Date(user.registrationDate).toLocaleDateString() : "--");
+        profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (user.dob || "--");
+        profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (user.age || "--");
+        profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (user.country || "--");
+        profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (user.city || "--");
+    }
+
+    renderProfile(currentUser);
 
     editBtn.onclick = function() {
         editSection.style.display = "block";
         editName.value = currentUser.name || "";
         editEmail.value = currentUser.email || "";
+        editDOB.value = currentUser.dob || "";
+        editAge.value = currentUser.age || "";
+        editCountry.value = currentUser.country || "";
+        editCity.value = currentUser.city || "";
         profileMsg.textContent = "";
         profileMsg.style.color = "#28a745";
     };
@@ -42,38 +60,53 @@ document.addEventListener('DOMContentLoaded', function() {
     saveBtn.onclick = function() {
         const newName = editName.value.trim();
         const newEmail = editEmail.value.trim();
+        const newDOB = editDOB.value;
+        const newAge = editAge.value.trim();
+        const newCountry = editCountry.value.trim();
+        const newCity = editCity.value.trim();
+
         if (!newName || !newEmail) {
             profileMsg.style.color = "#dc3545";
             profileMsg.textContent = "Name and email cannot be empty.";
             return;
         }
-        // Basic email validation
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
             profileMsg.style.color = "#dc3545";
             profileMsg.textContent = "Invalid email format.";
             return;
         }
-        // Update in localStorage
         let users = JSON.parse(localStorage.getItem('users')) || [];
-        // Check if email is already taken by another user
         if (users.some(u => u.email === newEmail && u.email !== currentUser.email)) {
             profileMsg.style.color = "#dc3545";
             profileMsg.textContent = "Email already in use.";
             return;
         }
-        // Update user in users array
         users = users.map(u => {
             if (u.email === currentUser.email) {
-                return { ...u, name: newName, email: newEmail };
+                return { 
+                    ...u, 
+                    name: newName, 
+                    email: newEmail, 
+                    dob: newDOB, 
+                    age: newAge, 
+                    country: newCountry, 
+                    city: newCity 
+                };
             }
             return u;
         });
         localStorage.setItem('users', JSON.stringify(users));
-        // Update currentUser
-        const updatedUser = { ...currentUser, name: newName, email: newEmail };
+        const updatedUser = { 
+            ...currentUser, 
+            name: newName, 
+            email: newEmail, 
+            dob: newDOB, 
+            age: newAge, 
+            country: newCountry, 
+            city: newCity 
+        };
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-        profileName.textContent = newName;
-        profileEmail.textContent = newEmail;
+        renderProfile(updatedUser);
         profileMsg.style.color = "#28a745";
         profileMsg.textContent = "Profile updated successfully!";
         editSection.style.display = "none";
