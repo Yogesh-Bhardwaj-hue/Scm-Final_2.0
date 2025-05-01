@@ -151,6 +151,22 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 <!-- CONTRIBUTION-STATS:START -->
 # Contribution Statistics
+
+## Visual Contribution Chart
+
+[![Contributors](https://contrib.rocks/image?repo=studentGarv/Blog_Master_Pro)](https://github.com/studentGarv/Blog_Master_Pro/graphs/contributors)
+
+## Contribution Breakdown
+
+```mermaid
+pie title Contribution by Author
+    "Yogesh Bhardwaj": 38
+    "Harshit Garg": 5
+    "Sarthak Aggarwal": 2
+    "Garv Mehra": 25
+```
+
+Last updated: Thu May  1 20:59:54 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
