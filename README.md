@@ -1,4 +1,4 @@
-# sarthak Aggarwal
+# BlogMaster Pro
 
 Your Ultimate Blogging Platform
 
