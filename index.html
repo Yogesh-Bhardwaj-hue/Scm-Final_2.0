@@ -515,20 +515,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Get the target section ID from href (e.g., #home)
             const targetId = this.getAttribute('href');
             if (targetId && targetId.startsWith('#')) {
-                // Hide profile section
-                profileSection.style.display = 'none';
-                // Show the target section
-                mainSections.forEach(sec => {
-                    if ('#' + sec.id === targetId) {
-                        sec.style.display = 'block';
-                        window.scrollTo(0, sec.offsetTop);
-                    } else if (sec.id !== 'profile-section') {
-                        sec.style.display = 'block';
-                    }
-                });
+                // Hide all sections
+                mainSections.forEach(sec => sec.style.display = 'none');
+                // Show only the selected section
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    window.scrollTo(0, targetSection.offsetTop);
+                }
             }
         });
     });
