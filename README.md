@@ -157,16 +157,18 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 |-------------|---------|-----------|-----------|
 | GARV | 2 | 0 | 0 |
 | MEHRA | 2 | 0 | 0 |
+| GitHub | 1 | 18 | 0 |
+| Action | 1 | 18 | 0 |
 | Harshit | 1 | 1 | 0 |
 | Garg | 1 | 1 | 0 |
 | Sarthak-1818 | 2 | 2020 | 2 |
-| Yogesh | 17 | 2721 | 19 |
-| . | 31 | 6130 | 118 |
-| Yogesh-Bhardwaj-hue | 10 | 2720 | 18 |
+| Yogesh | 19 | 2729 | 31 |
+| . | 34 | 6156 | 130 |
+| Yogesh-Bhardwaj-hue | 12 | 2728 | 30 |
 | harshit1879 | 3 | 8 | 0 |
 | studentGarv | 7 | 1381 | 97 |
 
-Last updated: Thu May  1 12:30:35 UTC 2025
+Last updated: Thu May  1 12:56:14 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
