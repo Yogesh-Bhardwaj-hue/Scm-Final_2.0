@@ -148,6 +148,9 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
            - sarthak Aggarwal
            - Harshit Garg
 
+<!-- CONTRIBUTION-STATS:START -->
+<!-- CONTRIBUTION-STATS:END -->
+
 ---
 
 ## License
