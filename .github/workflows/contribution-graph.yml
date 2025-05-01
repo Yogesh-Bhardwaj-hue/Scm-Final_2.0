@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Get full history
+          fetch-depth: 0
       
       - name: Generate Contribution Stats
         run: |
@@ -23,32 +23,29 @@ jobs:
           echo "# Contribution Statistics" > stats.md
           echo "" >> stats.md
           
-          # Add a visual contributor chart
+          # Add visual contributor images
           echo "## Visual Contribution Chart" >> stats.md
           echo "" >> stats.md
           echo "[![Contributors](https://contrib.rocks/image?repo=${GITHUB_REPOSITORY})](https://github.com/${GITHUB_REPOSITORY}/graphs/contributors)" >> stats.md
           echo "" >> stats.md
           
-          # Add the table as before
-          echo "## Detailed Contributions" >> stats.md
+          # Start building the mermaid pie chart
+          echo "## Contribution Breakdown" >> stats.md
           echo "" >> stats.md
-          echo "| Contributor | Commits | Additions | Deletions |" >> stats.md
-          echo "|-------------|---------|-----------|-----------|" >> stats.md
+          echo '```mermaid' >> stats.md
+          echo "pie title Contribution by Author" >> stats.md
           
-          # Get list of ALL contributors including those with access listed in GitHub
+          # Get list of contributors and their commit counts
           CONTRIBUTORS=$(git log --format='%an' | sort -u)
           
           for contributor in $CONTRIBUTORS; do
             commits=$(git log --author="$contributor" --oneline | wc -l)
-            additions=$(git log --author="$contributor" --stat | grep -o '[0-9]* insertion' | awk '{s+=$1} END {print s}')
-            deletions=$(git log --author="$contributor" --stat | grep -o '[0-9]* deletion' | awk '{s+=$1} END {print s}')
-            
-            # Handle empty values
-            [ -z "$additions" ] && additions=0
-            [ -z "$deletions" ] && deletions=0
-            
-            echo "| $contributor | $commits | $additions | $deletions |" >> stats.md
+            # Add this contributor to the pie chart
+            echo "    \"$contributor\": $commits" >> stats.md
           done
+          
+          # Close the mermaid code block
+          echo '```' >> stats.md
           
           # Add timestamp
           echo "" >> stats.md
@@ -69,5 +66,5 @@ jobs:
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git add README.md
-          git commit -m "Update contribution stats" || echo "No changes to commit"
+          git commit -m "Update contribution charts" || echo "No changes to commit"
           git push
