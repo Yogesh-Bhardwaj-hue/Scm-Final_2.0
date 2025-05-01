@@ -149,6 +149,24 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
            - Harshit Garg
 
 <!-- CONTRIBUTION-STATS:START -->
+# Contribution Statistics
+
+## Total Contributions
+
+| Contributor | Commits | Additions | Deletions |
+|-------------|---------|-----------|-----------|
+| GARV | 2 | 0 | 0 |
+| MEHRA | 2 | 0 | 0 |
+| Harshit | 1 | 1 | 0 |
+| Garg | 1 | 1 | 0 |
+| Sarthak-1818 | 2 | 2020 | 2 |
+| Yogesh | 17 | 2721 | 19 |
+| . | 31 | 6130 | 118 |
+| Yogesh-Bhardwaj-hue | 10 | 2720 | 18 |
+| harshit1879 | 3 | 8 | 0 |
+| studentGarv | 7 | 1381 | 97 |
+
+Last updated: Thu May  1 12:30:35 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
