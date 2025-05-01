@@ -143,32 +143,14 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 ---
 
 ## Contributing
-           - Garv Mehra
-           - Yogesh Bhardwaj
-           - sarthak Aggarwal
-           - Harshit Garg
+
+- Garv Mehra
+- Yogesh Bhardwaj
+- Sarthak Aggarwal
+- Harshit Garg
 
 <!-- CONTRIBUTION-STATS:START -->
 # Contribution Statistics
-
-## Total Contributions
-
-| Contributor | Commits | Additions | Deletions |
-|-------------|---------|-----------|-----------|
-| GARV | 2 | 0 | 0 |
-| MEHRA | 2 | 0 | 0 |
-| GitHub | 3 | 30 | 10 |
-| Action | 3 | 30 | 10 |
-| Harshit | 1 | 1 | 0 |
-| Garg | 1 | 1 | 0 |
-| Sarthak-1818 | 2 | 2020 | 2 |
-| Yogesh | 23 | 2885 | 410 |
-| . | 40 | 6324 | 519 |
-| Yogesh-Bhardwaj-hue | 14 | 2884 | 409 |
-| harshit1879 | 3 | 8 | 0 |
-| studentGarv | 7 | 1381 | 97 |
-
-Last updated: Thu May  1 13:17:46 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
