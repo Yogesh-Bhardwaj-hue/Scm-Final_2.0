@@ -150,6 +150,28 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 - Harshit Garg
 
 <!-- CONTRIBUTION-STATS:START -->
+# Contribution Statistics
+
+## Visual Contribution Chart
+
+[![Contributors](https://contrib.rocks/image?repo=studentGarv/Blog_Master_Pro)](https://github.com/studentGarv/Blog_Master_Pro/graphs/contributors)
+
+## Detailed Contributions
+
+| Contributor | Commits | Additions | Deletions |
+|-------------|---------|-----------|-----------|
+| GARV | 2 | 0 | 0 |
+| MEHRA | 2 | 0 | 0 |
+| Harshit | 1 | 1 | 0 |
+| Garg | 1 | 1 | 0 |
+| Sarthak-1818 | 2 | 2020 | 2 |
+| Yogesh | 17 | 2721 | 19 |
+| . | 35 | 6347 | 1610 |
+| Yogesh-Bhardwaj-hue | 10 | 2720 | 18 |
+| harshit1879 | 3 | 8 | 0 |
+| studentGarv | 11 | 1598 | 1589 |
+
+Last updated: Thu May  1 09:57:24 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
