@@ -1,0 +1,70 @@
+name: Update Contributors Graph
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'  # Daily update
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for contribution data
+      
+      - name: Generate Contribution Stats
+        run: |
+          # Create a temporary file for statistics
+          echo "# Contribution Statistics" > stats.md
+          echo "" >> stats.md
+          echo "## Total Contributions" >> stats.md
+          echo "" >> stats.md
+          echo "| Contributor | Commits | Additions | Deletions |" >> stats.md
+          echo "|-------------|---------|-----------|-----------|" >> stats.md
+          
+          # Get list of contributors
+          CONTRIBUTORS=$(git log --format='%an' | sort -u)
+          
+          # Generate stats for each contributor
+          for contributor in $CONTRIBUTORS; do
+            commits=$(git log --author="$contributor" --oneline | wc -l)
+            additions=$(git log --author="$contributor" --stat | grep -o '[0-9]* insertion' | awk '{s+=$1} END {print s}')
+            deletions=$(git log --author="$contributor" --stat | grep -o '[0-9]* deletion' | awk '{s+=$1} END {print s}')
+            
+            # Handle empty values
+            [ -z "$additions" ] && additions=0
+            [ -z "$deletions" ] && deletions=0
+            
+            echo "| $contributor | $commits | $additions | $deletions |" >> stats.md
+          done
+          
+          # Add timestamp
+          echo "" >> stats.md
+          echo "Last updated: $(date)" >> stats.md
+          
+      - name: Update README with Stats
+        run: |
+          # Find the section to replace in README
+          if grep -q "<!-- CONTRIBUTION-STATS:START -->" README.md; then
+            # If the marker exists, replace content between markers
+            sed -i '/<!-- CONTRIBUTION-STATS:START -->/,/<!-- CONTRIBUTION-STATS:END -->/c\<!-- CONTRIBUTION-STATS:START -->\n'"$(cat stats.md)"'\n<!-- CONTRIBUTION-STATS:END -->' README.md
+          else
+            # If the marker doesn't exist, append to the end
+            echo "" >> README.md
+            echo "<!-- CONTRIBUTION-STATS:START -->" >> README.md
+            cat stats.md >> README.md
+            echo "<!-- CONTRIBUTION-STATS:END -->" >> README.md
+          fi
+      
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add README.md
+          git commit -m "Update contribution stats" || echo "No changes to commit"
+          git push
