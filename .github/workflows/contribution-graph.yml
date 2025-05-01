@@ -46,20 +46,17 @@ jobs:
           # Add timestamp
           echo "" >> stats.md
           echo "Last updated: $(date)" >> stats.md
-          
+      
       - name: Update README with Stats
         run: |
-          # Find the section to replace in README
-          if grep -q "<!-- CONTRIBUTION-STATS:START -->" README.md; then
-            # If the marker exists, replace content between markers
-            sed -i '/<!-- CONTRIBUTION-STATS:START -->/,/<!-- CONTRIBUTION-STATS:END -->/c\<!-- CONTRIBUTION-STATS:START -->\n'"$(cat stats.md)"'\n<!-- CONTRIBUTION-STATS:END -->' README.md
-          else
-            # If the marker doesn't exist, append to the end
-            echo "" >> README.md
-            echo "<!-- CONTRIBUTION-STATS:START -->" >> README.md
-            cat stats.md >> README.md
-            echo "<!-- CONTRIBUTION-STATS:END -->" >> README.md
-          fi
+          # Use awk instead of sed for more reliable multiline replacement
+          awk '
+          BEGIN { p=1 }
+          /<!-- CONTRIBUTION-STATS:START -->/ { print; p=0; system("cat stats.md") }
+          /<!-- CONTRIBUTION-STATS:END -->/ { p=1; print; next }
+          p { print }
+          ' README.md > README.md.new
+          mv README.md.new README.md
       
       - name: Commit and Push Changes
         run: |
