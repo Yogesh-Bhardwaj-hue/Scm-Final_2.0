@@ -35,13 +35,57 @@ jobs:
           echo '```mermaid' >> stats.md
           echo "pie title Contribution by Author" >> stats.md
           
+          # Normalized contributor mapping
+          declare -A contributor_map
+          contributor_map["GARV"]="Garv Mehra"
+          contributor_map["MEHRA"]="Garv Mehra"
+          contributor_map["studentGarv"]="Garv Mehra"
+          contributor_map["Garv"]="Garv Mehra"
+          
+          contributor_map["Yogesh"]="Yogesh Bhardwaj"
+          contributor_map["Yogesh-Bhardwaj-hue"]="Yogesh Bhardwaj"
+          contributor_map["Yogesh Bhardwaj"]="Yogesh Bhardwaj"
+          
+          contributor_map["Harshit"]="Harshit Garg"
+          contributor_map["Garg"]="Harshit Garg" 
+          contributor_map["harshit1879"]="Harshit Garg"
+          
+          contributor_map["Sarthak-1818"]="Sarthak Aggarwal"
+          contributor_map["Sarthak"]="Sarthak Aggarwal"
+          contributor_map["Aggarwal"]="Sarthak Aggarwal"
+          contributor_map["Sarthak Aggarwal"]="Sarthak Aggarwal"
+          
+          # Initialize counters for each normalized contributor
+          declare -A commit_counts
+          commit_counts["Garv Mehra"]=0
+          commit_counts["Yogesh Bhardwaj"]=0
+          commit_counts["Harshit Garg"]=0
+          commit_counts["Sarthak Aggarwal"]=0
+          
           # Get list of contributors and their commit counts
           CONTRIBUTORS=$(git log --format='%an' | sort -u)
           
           for contributor in $CONTRIBUTORS; do
+            # Skip GitHub Action commits
+            if [[ "$contributor" == "GitHub"* || "$contributor" == "Action"* || "$contributor" == "." ]]; then
+              continue
+            fi
+            
             commits=$(git log --author="$contributor" --oneline | wc -l)
-            # Add this contributor to the pie chart
-            echo "    \"$contributor\": $commits" >> stats.md
+            
+            # Map to normalized name if exists
+            normalized="${contributor_map[$contributor]}"
+            if [ -n "$normalized" ]; then
+              commit_counts["$normalized"]=$((commit_counts["$normalized"] + commits))
+            else
+              # If no mapping exists, use the original name
+              commit_counts["$contributor"]=$commits
+            fi
+          done
+          
+          # Output the normalized contributors to the pie chart
+          for contributor in "${!commit_counts[@]}"; do
+            echo "    \"$contributor\": ${commit_counts[$contributor]}" >> stats.md
           done
           
           # Close the mermaid code block
