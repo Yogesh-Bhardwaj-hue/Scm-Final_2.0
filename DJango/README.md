@@ -89,3 +89,8 @@ django-environ
 - Store sensitive information in `.env`, **never** commit it to version control.
 - For production, set `DEBUG=False` and configure `ALLOWED_HOSTS` in `.env`.
 - You can further split `settings.py` for different environments if needed.
+
+---
+
+<!-- CONTRIBUTION-STATS:START -->
+<!-- CONTRIBUTION-STATS:END -->
