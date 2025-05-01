@@ -160,21 +160,13 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 ```mermaid
 pie title Contribution by Author
-    "GARV": 2
-    "MEHRA": 2
-    "GitHub": 1
-    "Action": 1
-    "Harshit": 1
-    "Garg": 1
-    "Sarthak-1818": 2
-    "Yogesh": 17
-    ".": 37
-    "Yogesh-Bhardwaj-hue": 10
-    "harshit1879": 3
-    "studentGarv": 12
+    "Yogesh Bhardwaj": 27
+    "Harshit Garg": 5
+    "Sarthak Aggarwal": 2
+    "Garv Mehra": 17
 ```
 
-Last updated: Thu May  1 10:01:17 UTC 2025
+Last updated: Thu May  1 10:05:12 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
