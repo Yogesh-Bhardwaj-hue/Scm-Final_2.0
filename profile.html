@@ -2,104 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <title>User Profile - BlogMaster Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background: #f6f8fa;
+            background: #f4f7fa;
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         .profile-container {
-            max-width: 400px;
+            max-width: 420px;
             margin: 40px auto;
             background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 32px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            padding: 36px 28px 28px 28px;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        .profile-container:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
         }
         .profile-avatar {
-            width: 90px;
-            height: 90px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 16px;
+            margin: 0 auto 18px;
             display: block;
-            border: 2px solid #007bff;
+            border: 3px solid #007bff;
+            background: #e9ecef;
         }
         .profile-info {
             text-align: center;
+            margin-bottom: 18px;
         }
         .profile-info h2 {
-            margin: 0 0 8px;
+            margin: 0 0 10px;
             color: #222;
+            font-size: 2rem;
+            font-weight: 600;
         }
         .profile-info p {
-            margin: 4px 0;
-            color: #555;
+            margin: 6px 0;
+            color: #444;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
         }
         .profile-actions {
-            margin-top: 24px;
+            margin-top: 18px;
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
         }
         .profile-actions button {
-            padding: 10px;
+            padding: 10px 22px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             background: #007bff;
             color: #fff;
             font-size: 1rem;
             cursor: pointer;
+            font-weight: 500;
             transition: background 0.2s;
         }
         .profile-actions button.logout {
             background: #dc3545;
         }
+        .profile-actions button.back {
+            background: #6c757d;
+        }
         .profile-actions button:hover {
-            opacity: 0.9;
+            opacity: 0.93;
         }
         .edit-section {
-            margin-top: 20px;
+            margin-top: 22px;
             display: none;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 18px 12px 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         .edit-section input {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            padding: 9px 10px;
+            margin-bottom: 12px;
+            border-radius: 5px;
+            border: 1px solid #bfc9d1;
+            font-size: 1rem;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        .edit-section input:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
         }
         .message {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 12px;
             color: #28a745;
+            font-weight: 500;
+            font-size: 1.08rem;
         }
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .profile-container {
-                padding: 16px 6px;
+                padding: 18px 4px 18px 4px;
             }
         }
     </style>
 </head>
 <body>
+    <nav style="padding: 18px 0 0 18px;">
+        <a href="index.html" class="back-link">
+            <button class="back" style="margin-bottom: 18px;"><i class="fas fa-arrow-left"></i> Back to Home</button>
+        </a>
+    </nav>
     <div class="profile-container">
         <img src="default-avatar.png" alt="Avatar" class="profile-avatar" id="avatarImg">
         <div class="profile-info">
             <h2 id="profileName">User Name</h2>
-            <p id="profileEmail">user@example.com</p>
-            <p id="profileDate">Joined: --</p>
+            <p id="profileEmail"><i class="fas fa-envelope"></i> user@example.com</p>
+            <p id="profileDate"><i class="fas fa-calendar-alt"></i> Joined: --</p>
+            <p id="profileDOB"><i class="fas fa-birthday-cake"></i> Date of Birth: --</p>
+            <p id="profileAge"><i class="fas fa-user"></i> Age: --</p>
+            <p id="profileCountry"><i class="fas fa-flag"></i> Country: --</p>
+            <p id="profileCity"><i class="fas fa-city"></i> City: --</p>
         </div>
         <div class="profile-actions">
             <button id="editBtn">Edit Profile</button>
-            <button class="logout" id="logoutBtn">Logout</button>
+            <button class="logout" id="logoutBtnProfile">Logout</button>
         </div>
-        <div class="edit-section" id="editSection">
+        <div class="edit-section" id="editSection" style="display:none;">
             <input type="text" id="editName" placeholder="Enter new name">
             <input type="email" id="editEmail" placeholder="Enter new email">
+            <input type="date" id="editDOB" placeholder="Date of Birth">
+            <input type="number" id="editAge" placeholder="Age" min="1" max="120">
+            <input type="text" id="editCountry" placeholder="Country">
+            <input type="text" id="editCity" placeholder="City">
             <button id="saveBtn">Save Changes</button>
             <button id="cancelBtn" style="background:#6c757d;">Cancel</button>
         </div>
