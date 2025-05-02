@@ -311,12 +311,18 @@
             <form id="add-blog-form">
                 <input type="text" id="blog-title" placeholder="Blog Title" required>
                 <input type="text" id="blog-subtitle" placeholder="Subtitle">
-                <ul>tarea id="blog-short-desc" placeholder="Short Description (max 100 characters)" maxlength="100" required></textarea>
-                    <li><a href="#home">Home</a></li>lder="Long Description" required></textarea>
-                    <li><a href="#about">About</a></li>ts" placeholder="Bullet Points (comma-separated)">
-                    <li><a href="#services">Services</a></li>ceholder="YouTube Video Link">
-                    <li><a href="#blogs">Blogs</a></li>
-                </ul>option value="">Select Category</option>
+                <textarea id="blog-short-desc" placeholder="Short Description (max 100 characters)" maxlength="100" required></textarea>
+                <textarea id="blog-long-desc" placeholder="Long Description" required></textarea>
+                <input type="text" id="blog-bullet-points" placeholder="Bullet Points (comma-separated)">
+                <input type="text" id="blog-youtube-link" placeholder="YouTube Video Link">
+                <select id="blog-category" required>
+                    <option value="">Select Category</option>
+                    <option value="technology">Technology</option>
+                    <option value="lifestyle">Lifestyle</option>
+                    <option value="travel">Travel</option>
+                    <option value="food">Food</option>
+                    <option value="health">Health</option>
+                </select>
             </div>  <option value="technology">Technology</option>
             <div class="footer-section">tyle">Lifestyle</option>
                 <h3>Connect With Us</h3>l">Travel</option>
