@@ -160,13 +160,13 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 40
+    "Yogesh Bhardwaj": 44
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
     "Garv Mehra": 25
 ```
 
-Last updated: Fri May  2 05:50:11 UTC 2025
+Last updated: Fri May  2 06:07:32 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
