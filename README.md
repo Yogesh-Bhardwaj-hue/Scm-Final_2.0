@@ -135,12 +135,12 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 <!-- BLOG-ANALYTICS:START -->
 # Blog Analytics Dashboard
 
-Last updated: Sat May  3 23:09:16 UTC 2025
+Last updated: Sat May  3 23:31:15 UTC 2025
 
 ## Overview
 
 📊 **Total Blog Posts:** 6
-📝 **Total Words:** 2486
+📝 **Total Words:** 1722
 ⏱️ **Average Reading Time:** 1 minutes
 
 ## Popular Topics
@@ -148,10 +148,10 @@ Last updated: Sat May  3 23:09:16 UTC 2025
 ```mermaid
 pie title Most Used Topics
     "Java": 9
-    "CSS": 7
+    "CSS": 5
     "Django": 7
     "JavaScript": 5
-    "HTML": 21
+    "HTML": 7
     "Python": 5
 ```
 <!-- BLOG-ANALYTICS:END -->
