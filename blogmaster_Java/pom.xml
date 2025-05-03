@@ -4,7 +4,7 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blogmasterpro</groupId>
-    <artifactId>blogmaster_java</artifactId>
+    <artifactId>blog-analytics</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -19,4 +19,23 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <!-- Include the video directory in build -->
+            <resource>
+                <directory>video</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <mainClass>com.blogmasterpro.BlogAnalyticsRunner</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -13,6 +13,7 @@ Your Ultimate Blogging Platform
 - [Setup & Installation](#setup--installation)
 - [Usage](#usage)
 - [Profile Page](#profile-page)
+- [Blog Analytics](#blog-analytics)
 - [Best Practices Followed](#best-practices-followed)
 - [Contributing](#contributing)
 - [License](#license)
@@ -126,6 +127,13 @@ The profile page allows users to:
 
 **Navigation:**  
 You can return to any other section (Home, About, etc.) using the navbar, even after entering the profile page.
+
+---
+
+## Blog Analytics
+
+<!-- BLOG-ANALYTICS:START -->
+<!-- BLOG-ANALYTICS:END -->
 
 ---
 
