@@ -154,19 +154,19 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 ## Visual Contribution Chart
 
-[![Contributors](https://contrib.rocks/image?repo=studentGarv/Blog_Master_Pro)](https://github.com/studentGarv/Blog_Master_Pro/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=Yogesh-Bhardwaj-hue/Scm-Final_2.0)](https://github.com/Yogesh-Bhardwaj-hue/Scm-Final_2.0/graphs/contributors)
 
 ## Contribution Breakdown
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 50
+    "Yogesh Bhardwaj": 54
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
     "Garv Mehra": 25
 ```
 
-Last updated: Fri May  2 10:46:00 UTC 2025
+Last updated: Sat May  3 12:23:23 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
