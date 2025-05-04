@@ -7,6 +7,64 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        :root {
+            --primary-bg: #f6f8fa;
+            --primary-text: #222;
+            --secondary-bg: #fff;
+            --accent: #007bff;
+            --card-bg: #fff;
+            --nav-bg: #fff;
+            --footer-bg: #222;
+            --footer-text: #fff;
+        }
+        body {
+            background: var(--primary-bg);
+            color: var(--primary-text);
+            transition: background 0.3s, color 0.3s;
+        }
+        header, nav {
+            background: var(--nav-bg);
+            transition: background 0.3s;
+        }
+        .main-section, .profile-container, .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            transition: background 0.3s, color 0.3s;
+        }
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--accent);
+            cursor: pointer;
+            margin-left: 18px;
+            transition: color 0.3s;
+        }
+        .theme-toggle-btn:focus {
+            outline: 2px solid var(--accent);
+        }
+        /* Dark mode overrides */
+        body.dark-mode {
+            --primary-bg: #181a1b;
+            --primary-text: #f6f8fa;
+            --secondary-bg: #23272b;
+            --accent: #4f8cff;
+            --card-bg: #23272b;
+            --nav-bg: #23272b;
+            --footer-bg: #181a1b;
+            --footer-text: #f6f8fa;
+        }
+        body.dark-mode .theme-toggle-btn {
+            color: #ffd700;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,6 +83,9 @@
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="profile.html" id="profileNavLink">Profile</a></li>
             </ul>
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle light/dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
             <div class="auth-buttons">
                 <a href="./login.html" id="loginButton">
                     <button class="login-btn">Log In</button>
@@ -323,28 +384,299 @@
                     <option value="food">Food</option>
                     <option value="health">Health</option>
                 </select>
-            </div>  <option value="technology">Technology</option>
-            <div class="footer-section">tyle">Lifestyle</option>
-                <h3>Connect With Us</h3>l">Travel</option>
-                <div class="social-icons">ood</option>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a> multiple>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>n type="submit">Add Blog</button>
-            </div>>
+                <input type="file" id="blog-images" accept="image/*" multiple>
+                <div id="image-preview"></div>
+                <button type="submit">Add Blog</button>
+            </form>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 BlogMaster Pro. All rights reserved.</p>
-        </div>ead-more-modal" class="modal">
-    </footer>class="modal-content">
-            <span class="close">&times;</span>
-    <div id="add-blog-modal" class="modal">iv>
+    </div>
+    <div id="read-more-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Add New Blog</h2>
-            <form id="add-blog-form">s@next/dist/aos.js"></script>
-                <input type="text" id="blog-title" placeholder="Blog Title" required>
-                <input type="text" id="blog-subtitle" placeholder="Subtitle">
-                <textarea id="blog-short-desc" placeholder="Short Description (max 100 characters)" maxlength="100" required></textarea>
-                <textarea id="blog-long-desc" placeholder="Long Description" required></textarea>                <input type="text" id="blog-bullet-points" placeholder="Bullet Points (comma-separated)">                <input type="text" id="blog-youtube-link" placeholder="YouTube Video Link">                <select id="blog-category" required>                    <option value="">Select Category</option>                    <option value="technology">Technology</option>                    <option value="lifestyle">Lifestyle</option>                    <option value="travel">Travel</option>                    <option value="food">Food</option>                    <option value="health">Health</option>                </select>                <input type="file" id="blog-images" accept="image/*" multiple>                <div id="image-preview"></div>                <button type="submit">Add Blog</button>            </form>        </div>    </div>    <div id="read-more-modal" class="modal">        <div class="modal-content">            <span class="close">&times;</span>            <div id="full-blog-content"></div>        </div>    </div>    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>    <script src="script.js"></script>    <script src="login.js"></script>    <script>document.addEventListener('DOMContentLoaded', function() {    // Profile navigation    const profileNavLink = document.getElementById('profileNavLink');    const profileSection = document.getElementById('profile-section');    const mainSections = document.querySelectorAll('main > section');    if (profileNavLink) {        profileNavLink.addEventListener('click', function(e) {            e.preventDefault();            // Hide all main sections            mainSections.forEach(sec => sec.style.display = 'none');            // Show profile section            profileSection.style.display = 'block';            window.scrollTo(0, profileSection.offsetTop);            loadProfile();        });    }    // Profile logic    function loadProfile() {        const currentUser = JSON.parse(localStorage.getItem('currentUser'));        const profileName = document.getElementById('profileName');        const profileEmail = document.getElementById('profileEmail');        const profileDate = document.getElementById('profileDate');        const profileDOB = document.getElementById('profileDOB');        const profileAge = document.getElementById('profileAge');        const profileCountry = document.getElementById('profileCountry');        const profileCity = document.getElementById('profileCity');        const avatarImg = document.getElementById('avatarImg');        const editBtn = document.getElementById('editBtn');        const logoutBtn = document.getElementById('logoutBtnProfile');        const editSection = document.getElementById('editSection');        const editName = document.getElementById('editName');        const editEmail = document.getElementById('editEmail');        const editDOB = document.getElementById('editDOB');        const editAge = document.getElementById('editAge');        const editCountry = document.getElementById('editCountry');        const editCity = document.getElementById('editCity');        const saveBtn = document.getElementById('saveBtn');        const cancelBtn = document.getElementById('cancelBtn');        const profileMsg = document.getElementById('profileMsg');        if (!currentUser) {            window.location.href = "login.html";            return;        }        profileName.textContent = currentUser.name || "User Name";        profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + (currentUser.email || "user@example.com");        profileDate.innerHTML = '<i class="fas fa-calendar-alt"></i> Joined: ' + (currentUser.registrationDate ? new Date(currentUser.registrationDate).toLocaleDateString() : "--");        profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (currentUser.dob || "--");        profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (currentUser.age || "--");        profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (currentUser.country || "--");        profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (currentUser.city || "--");        editBtn.onclick = function() {            editSection.style.display = "block";            editName.value = currentUser.name || "";            editEmail.value = currentUser.email || "";            editDOB.value = currentUser.dob || "";            editAge.value = currentUser.age || "";            editCountry.value = currentUser.country || "";            editCity.value = currentUser.city || "";            profileMsg.textContent = "";            profileMsg.style.color = "#28a745";        };        cancelBtn.onclick = function() {            editSection.style.display = "none";            profileMsg.textContent = "";        };        saveBtn.onclick = function() {            const newName = editName.value.trim();            const newEmail = editEmail.value.trim();            const newDOB = editDOB.value;            const newAge = editAge.value.trim();            const newCountry = editCountry.value.trim();            const newCity = editCity.value.trim();            if (!newName || !newEmail) {                profileMsg.style.color = "#dc3545";                profileMsg.textContent = "Name and email cannot be empty.";                return;            }            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {                profileMsg.style.color = "#dc3545";                profileMsg.textContent = "Invalid email format.";                return;            }            let users = JSON.parse(localStorage.getItem('users')) || [];            if (users.some(u => u.email === newEmail && u.email !== currentUser.email)) {                profileMsg.style.color = "#dc3545";                profileMsg.textContent = "Email already in use.";                return;            }            users = users.map(u => {                if (u.email === currentUser.email) {                    return {                         ...u,                         name: newName,                         email: newEmail,                         dob: newDOB,                         age: newAge,                         country: newCountry,                         city: newCity                     };                }                return u;            });            localStorage.setItem('users', JSON.stringify(users));            const updatedUser = {                 ...currentUser,                 name: newName,                 email: newEmail,                 dob: newDOB,                 age: newAge,                 country: newCountry,                 city: newCity             };            localStorage.setItem('currentUser', JSON.stringify(updatedUser));            profileName.textContent = newName;            profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + newEmail;            profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (newDOB || "--");            profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (newAge || "--");            profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (newCountry || "--");            profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (newCity || "--");            profileMsg.style.color = "#28a745";            profileMsg.textContent = "Profile updated successfully!";            editSection.style.display = "none";        };        logoutBtn.onclick = function() {            localStorage.removeItem('currentUser');            window.location.href = "login.html";        };    }    // Enable navigation back to other sections from Profile    const navLinks = document.querySelectorAll('.nav-links a:not(#profileNavLink)');    const profileSection = document.getElementById('profile-section');    const mainSections = document.querySelectorAll('main > section');    navLinks.forEach(link => {        link.addEventListener('click', function(e) {            const targetId = this.getAttribute('href');            if (targetId && targetId.startsWith('#')) {                // Hide all sections                mainSections.forEach(sec => sec.style.display = 'none');                // Show only the selected section                const targetSection = document.querySelector(targetId);                if (targetSection) {                    targetSection.style.display = 'block';                    window.scrollTo(0, targetSection.offsetTop);                }            }        });    });});</script><style>/* Add this CSS at the end of your style.css or inside a <style> tag in index.html */.profile-section {    background: #f4f7fa;    padding: 40px 0;}.profile-container {    max-width: 420px;    margin: 40px auto;    background: #fff;    border-radius: 16px;    box-shadow: 0 4px 24px rgba(0,0,0,0.10);    padding: 36px 28px 28px 28px;    position: relative;    transition: box-shadow 0.2s;}.profile-container:hover {    box-shadow: 0 8px 32px rgba(0,0,0,0.13);}.profile-avatar {    width: 100px;    height: 100px;    border-radius: 50%;    object-fit: cover;    margin: 0 auto 18px;    display: block;    border: 3px solid #007bff;    background: #e9ecef;}.profile-info {    text-align: center;    margin-bottom: 18px;}.profile-info h2 {    margin: 0 0 10px;    color: #222;    font-size: 2rem;    font-weight: 600;}.profile-info p {    margin: 6px 0;    color: #444;    font-size: 1.05rem;    display: flex;    align-items: center;    justify-content: center;    gap: 7px;}.profile-actions {    margin-top: 18px;    display: flex;    flex-direction: row;    gap: 16px;    justify-content: center;}.profile-actions button {    padding: 10px 22px;    border: none;    border-radius: 6px;    background: #007bff;    color: #fff;    font-size: 1rem;    cursor: pointer;    font-weight: 500;    transition: background 0.2s;}.profile-actions button.logout {    background: #dc3545;}.profile-actions button:hover {    opacity: 0.93;}.edit-section {    margin-top: 22px;    display: none;    background: #f8fafc;    border-radius: 8px;    padding: 18px 12px 12px 12px;    box-shadow: 0 2px 8px rgba(0,0,0,0.04);}.edit-section input {    width: 100%;    padding: 9px 10px;    margin-bottom: 12px;    border-radius: 5px;    border: 1px solid #bfc9d1;    font-size: 1rem;    background: #fff;    transition: border 0.2s;}.edit-section input:focus {    border: 1.5px solid #007bff;    outline: none;}.message {    text-align: center;    margin-top: 12px;    color: #28a745;    font-weight: 500;    font-size: 1.08rem;}@media (max-width: 600px) {    .profile-container {        padding: 18px 4px 18px 4px;    }    .profile-section {        padding: 18px 0;    }}</style></body></html>
+            <div id="full-blog-content"></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = toggleBtn.querySelector('i');
+            // Load theme from localStorage
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+            toggleBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                icon.classList.toggle('fa-moon', !isDark);
+                icon.classList.toggle('fa-sun', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Profile navigation
+            const profileNavLink = document.getElementById('profileNavLink');
+            const profileSection = document.getElementById('profile-section');
+            const mainSections = document.querySelectorAll('main > section');
+            if (profileNavLink) {
+                profileNavLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Hide all main sections
+                    mainSections.forEach(sec => sec.style.display = 'none');
+                    // Show profile section
+                    profileSection.style.display = 'block';
+                    window.scrollTo(0, profileSection.offsetTop);
+                    loadProfile();
+                });
+            }
+            // Profile logic
+            function loadProfile() {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const profileName = document.getElementById('profileName');
+                const profileEmail = document.getElementById('profileEmail');
+                const profileDate = document.getElementById('profileDate');
+                const profileDOB = document.getElementById('profileDOB');
+                const profileAge = document.getElementById('profileAge');
+                const profileCountry = document.getElementById('profileCountry');
+                const profileCity = document.getElementById('profileCity');
+                const avatarImg = document.getElementById('avatarImg');
+                const editBtn = document.getElementById('editBtn');
+                const logoutBtn = document.getElementById('logoutBtnProfile');
+                const editSection = document.getElementById('editSection');
+                const editName = document.getElementById('editName');
+                const editEmail = document.getElementById('editEmail');
+                const editDOB = document.getElementById('editDOB');
+                const editAge = document.getElementById('editAge');
+                const editCountry = document.getElementById('editCountry');
+                const editCity = document.getElementById('editCity');
+                const saveBtn = document.getElementById('saveBtn');
+                const cancelBtn = document.getElementById('cancelBtn');
+                const profileMsg = document.getElementById('profileMsg');
+                if (!currentUser) {
+                    window.location.href = "login.html";
+                    return;
+                }
+                profileName.textContent = currentUser.name || "User Name";
+                profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + (currentUser.email || "user@example.com");
+                profileDate.innerHTML = '<i class="fas fa-calendar-alt"></i> Joined: ' + (currentUser.registrationDate ? new Date(currentUser.registrationDate).toLocaleDateString() : "--");
+                profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (currentUser.dob || "--");
+                profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (currentUser.age || "--");
+                profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (currentUser.country || "--");
+                profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (currentUser.city || "--");
+                editBtn.onclick = function() {
+                    editSection.style.display = "block";
+                    editName.value = currentUser.name || "";
+                    editEmail.value = currentUser.email || "";
+                    editDOB.value = currentUser.dob || "";
+                    editAge.value = currentUser.age || "";
+                    editCountry.value = currentUser.country || "";
+                    editCity.value = currentUser.city || "";
+                    profileMsg.textContent = "";
+                    profileMsg.style.color = "#28a745";
+                };
+                cancelBtn.onclick = function() {
+                    editSection.style.display = "none";
+                    profileMsg.textContent = "";
+                };
+                saveBtn.onclick = function() {
+                    const newName = editName.value.trim();
+                    const newEmail = editEmail.value.trim();
+                    const newDOB = editDOB.value;
+                    const newAge = editAge.value.trim();
+                    const newCountry = editCountry.value.trim();
+                    const newCity = editCity.value.trim();
+                    if (!newName || !newEmail) {
+                        profileMsg.style.color = "#dc3545";
+                        profileMsg.textContent = "Name and email cannot be empty.";
+                        return;
+                    }
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+                        profileMsg.style.color = "#dc3545";
+                        profileMsg.textContent = "Invalid email format.";
+                        return;
+                    }
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    if (users.some(u => u.email === newEmail && u.email !== currentUser.email)) {
+                        profileMsg.style.color = "#dc3545";
+                        profileMsg.textContent = "Email already in use.";
+                        return;
+                    }
+                    users = users.map(u => {
+                        if (u.email === currentUser.email) {
+                            return { 
+                                ...u, 
+                                name: newName, 
+                                email: newEmail, 
+                                dob: newDOB, 
+                                age: newAge, 
+                                country: newCountry, 
+                                city: newCity 
+                            };
+                        }
+                        return u;
+                    });
+                    localStorage.setItem('users', JSON.stringify(users));
+                    const updatedUser = { 
+                        ...currentUser, 
+                        name: newName, 
+                        email: newEmail, 
+                        dob: newDOB, 
+                        age: newAge, 
+                        country: newCountry, 
+                        city: newCity 
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                    profileName.textContent = newName;
+                    profileEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + newEmail;
+                    profileDOB.innerHTML = '<i class="fas fa-birthday-cake"></i> Date of Birth: ' + (newDOB || "--");
+                    profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (newAge || "--");
+                    profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (newCountry || "--");
+                    profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (newCity || "--");
+                    profileMsg.style.color = "#28a745";
+                    profileMsg.textContent = "Profile updated successfully!";
+                    editSection.style.display = "none";
+                };
+                logoutBtn.onclick = function() {
+                    localStorage.removeItem('currentUser');
+                    window.location.href = "login.html";
+                };
+            }
+            // Enable navigation back to other sections from Profile
+            const navLinks = document.querySelectorAll('.nav-links a:not(#profileNavLink)');
+            const profileSection = document.getElementById('profile-section');
+            const mainSections = document.querySelectorAll('main > section');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId.startsWith('#')) {
+                        // Hide all sections
+                        mainSections.forEach(sec => sec.style.display = 'none');
+                        // Show only the selected section
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            targetSection.style.display = 'block';
+                            window.scrollTo(0, targetSection.offsetTop);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        /* Add this CSS at the end of your style.css or inside a <style> tag in index.html */
+        .profile-section {
+            background: #f4f7fa;
+            padding: 40px 0;
+        }
+        .profile-container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            padding: 36px 28px 28px 28px;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        .profile-container:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 18px;
+            display: block;
+            border: 3px solid #007bff;
+            background: #e9ecef;
+        }
+        .profile-info {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .profile-info h2 {
+            margin: 0 0 10px;
+            color: #222;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .profile-info p {
+            margin: 6px 0;
+            color: #444;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+        .profile-actions {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
+        }
+        .profile-actions button {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            background: #007bff;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .profile-actions button.logout {
+            background: #dc3545;
+        }
+        .profile-actions button:hover {
+            opacity: 0.93;
+        }
+        .edit-section {
+            margin-top: 22px;
+            display: none;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 18px 12px 12px 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .edit-section input {
+            width: 100%;
+            padding: 9px 10px;
+            margin-bottom: 12px;
+            border-radius: 5px;
+            border: 1px solid #bfc9d1;
+            font-size: 1rem;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        .edit-section input:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+        .message {
+            text-align: center;
+            margin-top: 12px;
+            color: #28a745;
+            font-weight: 500;
+            font-size: 1.08rem;
+        }
+        @media (max-width: 600px) {
+            .profile-container {
+                padding: 18px 4px 18px 4px;
+            }
+            .profile-section {
+                padding: 18px 0;
+            }
+        }
+    </style>
+</body>
+</html>
