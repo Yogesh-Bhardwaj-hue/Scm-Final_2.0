@@ -13,6 +13,7 @@ Your Ultimate Blogging Platform
 - [Setup & Installation](#setup--installation)
 - [Usage](#usage)
 - [Profile Page](#profile-page)
+- [Blog Analytics](#blog-analytics)
 - [Best Practices Followed](#best-practices-followed)
 - [Contributing](#contributing)
 - [License](#license)
@@ -129,6 +130,27 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 ---
 
+## Blog Analytics
+
+<!-- BLOG-ANALYTICS:START -->
+# Blog Analytics Dashboard
+
+## Overview
+
+📊 **Total Blog Posts:** 6
+
+⏱️ **Average Reading Time:** 1 minutes
+
+## Popular Topics
+
+```mermaid
+pie title Most Used Topics
+
+```
+<!-- BLOG-ANALYTICS:END -->
+
+---
+
 ## Best Practices Followed
 
 - **Professional Project Structure:** Clear separation of frontend and backend code.
@@ -160,13 +182,13 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 55
+    "Yogesh Bhardwaj": 70
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
-    "Garv Mehra": 25
+    "Garv Mehra": 42
 ```
 
-Last updated: Sat May  3 12:26:54 UTC 2025
+Last updated: Mon May  5 18:06:57 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---

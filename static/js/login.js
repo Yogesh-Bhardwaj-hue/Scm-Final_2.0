@@ -55,37 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            // Client-side validation
-            if (!validateEmail(email)) {
-                showMessage('Please enter a valid email address.', false);
-                document.getElementById('password').value = '';
-                return;
-            }
-            if (!validatePassword(password)) {
-                showMessage('Password must be at least 6 characters.', false);
-                document.getElementById('password').value = '';
-                return;
-            }
-
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
-
-            if (user) {
-                showMessage('Login successful! Redirecting...', true);
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                setTimeout(() => { 
-                    window.location.href = 'index.html';
-                }, 1500);
-            } else {
-                showMessage('Invalid email or password', false);
-                loginForm.classList.add('shake');
-                setTimeout(() => loginForm.classList.remove('shake'), 600);
-                document.getElementById('password').value = '';
-            }
+            // Let the form submit normally to Django view
+            // Don't preventDefault() here
         });
     }
 
@@ -131,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('users', JSON.stringify(users));
 
             showMessage('Account created successfully! Redirecting to login...', true);
-            setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+            setTimeout(() => { window.location.href = "/login/"; }, 2000);
         });
     }
 
@@ -141,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
             checkLoggedIn();
             showMessage('You have been logged out.', true);
             setTimeout(() => {
-                window.location.href = 'login.html';
+                window.location.href = "/login/";
             }, 1200);
         });
     }
@@ -156,6 +127,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 3000);
         }
     }
+
+    // CSRF token and fetch example
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    fetch('/blogs/add/', {
+        method: 'POST',
+        // ...
+        headers: {
+            'X-CSRFToken': csrfToken
+        }
+    });
 });
 
 
