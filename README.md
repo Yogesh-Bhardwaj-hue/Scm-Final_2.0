@@ -135,24 +135,17 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 <!-- BLOG-ANALYTICS:START -->
 # Blog Analytics Dashboard
 
-Last updated: Sun May  4 09:48:29 UTC 2025
-
 ## Overview
 
 📊 **Total Blog Posts:** 6
-📝 **Total Words:** 2317
+
 ⏱️ **Average Reading Time:** 1 minutes
 
 ## Popular Topics
 
 ```mermaid
 pie title Most Used Topics
-    "Java": 6
-    "CSS": 5
-    "Django": 6
-    "JavaScript": 3
-    "HTML": 19
-    "Python": 4
+
 ```
 <!-- BLOG-ANALYTICS:END -->
 
@@ -189,13 +182,13 @@ pie title Most Used Topics
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 55
+    "Yogesh Bhardwaj": 70
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
-    "Garv Mehra": 25
+    "Garv Mehra": 51
 ```
 
-Last updated: Sat May  3 12:26:54 UTC 2025
+Last updated: Mon May  5 18:34:33 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---

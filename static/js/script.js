@@ -127,7 +127,10 @@ const displayBlogs = (blogsToDisplay) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const blogId = parseInt(e.target.getAttribute('data-id'));
-            deleteBlog(blogId);
+            
+            if (confirm("Are you sure you want to delete this blog?")) {
+                window.location.href = `/blogs/delete/${blogId}/`;
+            }
         });
     });
 };
@@ -150,13 +153,6 @@ const showFullBlog = (blog) => {
         ` : ''}
     `;
     readMoreModal.style.display = 'block';
-};
-
-const deleteBlog = (id) => {
-    blogs = blogs.filter(blog => blog.id !== id);
-    localStorage.setItem('blogs', JSON.stringify(blogs));
-    updatePagination();
-    displayBlogs(getPaginatedBlogs());
 };
 
 const filterBlogs = () => {
@@ -243,24 +239,44 @@ blogImagesInput.addEventListener('change', (e) => {
 
 addBlogForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const newBlog = {
-        id: Date.now(),
-        title: document.getElementById('blog-title').value,
-        subtitle: document.getElementById('blog-subtitle').value,
-        shortDescription: document.getElementById('blog-short-desc').value,
-        longDescription: document.getElementById('blog-long-desc').value,
-        category: document.getElementById('blog-category').value,
-        bulletPoints: document.getElementById('blog-bullet-points').value.split(',').map(point => point.trim()),
-        youtubeLink: document.getElementById('blog-youtube-link').value,
-        images: Array.from(blogImagesInput.files).map(file => URL.createObjectURL(file))
-    };
-    blogs.unshift(newBlog);
-    localStorage.setItem('blogs', JSON.stringify(blogs));
-    addBlogModal.style.display = 'none';
-    addBlogForm.reset();
-    imagePreview.innerHTML = '';
-    updatePagination();
-    displayBlogs(getPaginatedBlogs());
+    
+    // Create FormData for file upload
+    const formData = new FormData();
+    formData.append('title', document.getElementById('blog-title').value);
+    formData.append('subtitle', document.getElementById('blog-subtitle').value);
+    formData.append('short_description', document.getElementById('blog-short-desc').value);
+    formData.append('long_description', document.getElementById('blog-long-desc').value);
+    formData.append('category', document.getElementById('blog-category').value);
+    formData.append('bullet_points', document.getElementById('blog-bullet-points').value);
+    formData.append('youtube_link', document.getElementById('blog-youtube-link').value);
+    
+    // Add images
+    const fileInput = document.getElementById('blog-images');
+    for (let i = 0; i < fileInput.files.length; i++) {
+        formData.append('images', fileInput.files[i]);
+    }
+    
+    // Add CSRF token
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+    // Send data to Django
+    fetch('/blogs/add/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrfToken
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            addBlogModal.style.display = 'none';
+            addBlogForm.reset();
+            imagePreview.innerHTML = '';
+            window.location.reload(); // Reload to see the new blog
+        }
+    })
+    .catch(error => console.error('Error:', error));
 });
 
 searchBar.addEventListener('input', filterBlogs);
