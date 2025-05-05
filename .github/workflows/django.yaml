@@ -1,0 +1,65 @@
+name: Django CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Manual trigger
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    
+    services:
+      # Add database service if needed
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install django; fi
+        
+    - name: Create .env file
+      run: |
+        echo "DEBUG=True" > blogmaster_django/.env
+        echo "SECRET_KEY=github-actions-test-key" >> blogmaster_django/.env
+        echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/test_db" >> blogmaster_django/.env
+        
+    - name: Run Migrations
+      run: |
+        cd blogmaster_django
+        python manage.py makemigrations
+        python manage.py migrate
+        
+    - name: Run Tests
+      run: |
+        cd blogmaster_django
+        python manage.py test
+        
+    - name: Collect Static Files
+      run: |
+        cd blogmaster_django
+        python manage.py collectstatic --noinput
