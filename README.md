@@ -183,7 +183,7 @@ pie title Most Used Topics
 
 ## Visual Contribution Chart
 
-[![Contributors](https://contrib.rocks/image?repo=studentGarv/Blog_Master_Pro)](https://github.com/studentGarv/Blog_Master_Pro/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=Yogesh-Bhardwaj-hue/Scm-Final_2.0)](https://github.com/Yogesh-Bhardwaj-hue/Scm-Final_2.0/graphs/contributors)
 
 ## Contribution Breakdown
 
@@ -195,7 +195,7 @@ pie title Contribution by Author
     "Garv Mehra": 34
 ```
 
-Last updated: Sun May  4 10:19:38 UTC 2025
+Last updated: Mon May  5 04:58:53 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
