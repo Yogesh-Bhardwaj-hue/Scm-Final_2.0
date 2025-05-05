@@ -1,3 +1,20 @@
+// Add at beginning of file
+function checkStorageAvailability() {
+    try {
+        const storage = window.localStorage;
+        const testKey = '__storage_test__';
+        storage.setItem(testKey, testKey);
+        storage.removeItem(testKey);
+        return true;
+    } catch (e) {
+        console.error('LocalStorage not available. Login functionality may not work.');
+        return false;
+    }
+}
+
+// Call this function before using localStorage
+checkStorageAvailability();
+
 //Changes made to the original code:
 // 1.  Client-side Email & Password Validation   
 // 2. Clear Password Fields on Failed Login/Signup
