@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class AudioMetadataMatcher {
+public class AudioMetaDataMatcher {
 
 	
 	private Connection connection;
@@ -16,6 +16,10 @@ public class AudioMetadataMatcher {
 		try {
 			connection = dbHelper.getConnection();
 		} catch (ClassNotFoundException e) {
+			System.err.println("Database driver not found: " + e.getMessage());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.err.println("Failed to connect to database: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
