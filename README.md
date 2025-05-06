@@ -140,25 +140,14 @@ Last updated: Sun May  4 09:48:29 UTC 2025
 ## Overview
 
 📊 **Total Blog Posts:** 6
-<<<<<<<<< Temporary merge branch 1
-📝 **Total Words:** 1722
-=========
 📝 **Total Words:** 2317
->>>>>>>>> Temporary merge branch 2
+>>>>>>> main
 ⏱️ **Average Reading Time:** 1 minutes
 
 ## Popular Topics
 
 ```mermaid
-pie title Most Used Topics
-<<<<<<<<< Temporary merge branch 1
-    "Java": 9
-    "CSS": 5
-    "Django": 7
-    "JavaScript": 5
-    "HTML": 7
-    "Python": 5
-=========
+pie title Most Used Topic
     "Java": 6
     "CSS": 5
     "Django": 6
@@ -208,7 +197,7 @@ pie title Contribution by Author
     "Garv Mehra": 56
 ```
 
-Last updated: Sun May  4 10:19:38 UTC 2025
+
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
