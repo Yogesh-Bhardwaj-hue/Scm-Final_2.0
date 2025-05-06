@@ -42,9 +42,9 @@ jobs:
           contributor_map["studentGarv"]="Garv Mehra"
           contributor_map["Garv"]="Garv Mehra"
 
-          # contributor_map["Yogesh"]="Yogesh Bhardwaj"
-          #contributor_map["Yogesh-Bhardwaj-hue"]="Yogesh Bhardwaj"
-          #contributor_map["Yogesh Bhardwaj"]="Yogesh Bhardwaj"
+          contributor_map["Yogesh"]="Yogesh Bhardwaj"
+          contributor_map["Yogesh-Bhardwaj-hue"]="Yogesh Bhardwaj"
+          contributor_map["Yogesh Bhardwaj"]="Yogesh Bhardwaj"
 
           contributor_map["Harshit"]="Harshit Garg"
           contributor_map["Garg"]="Harshit Garg"
@@ -60,8 +60,8 @@ jobs:
           declare -A commit_counts
           commit_counts["Garv Mehra"]=0
           commit_counts["Yogesh Bhardwaj"]=0
-          commit_counts["Harshit Garg"]=0
-          commit_counts["Sarthak Aggarwal"]=0
+          commit_counts["Harshit Garg"]=9
+          commit_counts["Sarthak Aggarwal"]=9
           
           # Get list of contributors and their commit counts
           CONTRIBUTORS=$(git log --format='%an' | sort -u)
@@ -108,8 +108,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'studentGarv'
-          git config --global user.email 'garv1630.becse24@chitkara.edu.in'
+          git config --global user.name 'Yogesh-Bhardwaj-Hue'
+          git config --global user.email 'yogesh1709.becse24@chitkara.edu.in'
           RANDOM_TEXT=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12)
           git add README.md
           git commit -m "$RANDOM_TEXT" || echo "No changes to commit"
