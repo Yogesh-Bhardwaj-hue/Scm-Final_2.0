@@ -107,8 +107,16 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'sarthak-1818'
-          git config --global user.email 'sarthak1663.becse24@chitkara.edu.in'
-          git add README.md
-          git commit -m "O.O" || echo "No changes to commit"
-          git push
+            git config --global user.name 'sarthak-1818'
+            git config --global user.email 'sarthak1663.becse24@chitkara.edu.in'
+        
+            # Generate random string (12 chars)
+            RANDOM_TEXT=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12)
+        
+            git add README.md
+        
+            # Use the random string in the commit message
+            git commit -m "Auto commit - $RANDOM_TEXT" || echo "No changes to commit"
+        
+            git push
+        
