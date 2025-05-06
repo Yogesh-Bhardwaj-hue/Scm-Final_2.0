@@ -110,5 +110,5 @@ jobs:
           git config --global user.name 'sarthak-1818'
           git config --global user.email 'sarthak1663.becse24@chitkara.edu.in'
           git add README.md
-          git commit -m "Update contribution charts" || echo "No changes to commit"
+          git commit -m "O.O" || echo "No changes to commit"
           git push
