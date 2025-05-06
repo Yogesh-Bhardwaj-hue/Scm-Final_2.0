@@ -189,13 +189,13 @@ pie title Most Used Topic
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 140
-    "Harshit Garg": 62
-    "Sarthak Aggarwal": 46
+    "Yogesh Bhardwaj": 134
+    "Harshit Garg": 64
+    "Sarthak Aggarwal": 47
     "Garv Mehra": 62
 ```
 
-Last updated: Tue May  6 13:47:43 UTC 2025
+Last updated: Tue May  6 13:48:16 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
