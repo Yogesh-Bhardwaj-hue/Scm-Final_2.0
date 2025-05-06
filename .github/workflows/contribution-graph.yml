@@ -51,6 +51,7 @@ jobs:
           contributor_map["harshit1879"]="Harshit Garg"
 
           contributor_map["Sarthak-1818"]="Sarthak Aggarwal"
+          contributor_map["sarthak-1818"]="Sarthak Aggarwal"
           contributor_map["Sarthak"]="Sarthak Aggarwal"
           contributor_map["Aggarwal"]="Sarthak Aggarwal"
           contributor_map["Sarthak Aggarwal"]="Sarthak Aggarwal"
@@ -59,7 +60,7 @@ jobs:
           declare -A commit_counts
           commit_counts["Garv Mehra"]=0
           commit_counts["Yogesh Bhardwaj"]=0
-          commit_counts["Harshit Garg"]=0
+          commit_counts["Harshit Garg"]=10
           commit_counts["Sarthak Aggarwal"]=0
 
           # Get list of contributors and their commit counts
