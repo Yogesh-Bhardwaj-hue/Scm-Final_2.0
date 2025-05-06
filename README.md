@@ -185,20 +185,20 @@ pie title Most Used Topic
 
 ## Visual Contribution Chart
 
-[![Contributors](https://contrib.rocks/image?repo=Yogesh-Bhardwaj-hue/Scm-Final_2.0)](https://github.com/Yogesh-Bhardwaj-hue/Scm-Final_2.0/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=studentGarv/Blog_Master_Pro)](https://github.com/studentGarv/Blog_Master_Pro/graphs/contributors)
 
 ## Contribution Breakdown
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 70
+    "Yogesh Bhardwaj": 76
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
     "Garv Mehra": 56
 ```
 
-<<<<<<<<< Temporary merge branch 1
 Last updated: Mon May  5 19:57:36 UTC 2025
+>>>>>>> caba9434ca42fb6b0bfe14cb9d2c3f883d321cdd
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
