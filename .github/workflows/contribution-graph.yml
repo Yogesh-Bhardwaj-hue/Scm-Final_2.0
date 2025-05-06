@@ -116,7 +116,7 @@ jobs:
             git add README.md
         
             # Use the random string in the commit message
-            git commit -m "Auto commit - $RANDOM_TEXT" || echo "No changes to commit"
+            git commit -m "$RANDOM_TEXT" || echo "No changes to commit"
         
             git push
         
