@@ -91,8 +91,8 @@ jobs:
       
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'harshit1879'
-          git config --global user.email 'harshit1879.becse24@chitkara.edu.in'
+          git config --global user.name 'Yogesh-Bhardwaj-Hue'
+          git config --global user.email 'yogesh1709.becse24@chitkara.edu.in'
           git add README.md
           git commit -m "Update blog analytics" || echo "No changes to commit"
           git push

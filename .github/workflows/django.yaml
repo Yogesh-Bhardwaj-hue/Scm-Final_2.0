@@ -66,8 +66,8 @@ jobs:
 
               - name: Commit and Push Changes
         run: |
-          git config --global user.name 'harshit1879'
-          git config --global user.email 'harshit1879.becse24@chitkara.edu.in'
+          git config --global user.name 'studentGarv'
+          git config --global user.email 'garv1630.becse24@chitkara.edu.in'
           git add README.md
           git commit -m "Update contribution charts" || echo "No changes to commit"
           git push
