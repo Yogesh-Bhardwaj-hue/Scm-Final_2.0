@@ -56,7 +56,9 @@ jobs:
           contributor_map["Sarthak"]="Sarthak Aggarwal"
           contributor_map["Aggarwal"]="Sarthak Aggarwal"
           contributor_map["Sarthak Aggarwal"]="Sarthak Aggarwal"
+          contributor_map["Yogesh-Bhardwaj-Hue"]="Sarthak Aggarwal"
 
+          commit_counts["Sarthak Aggarwal"]=$((commit_counts["Sarthak Aggarwal"] + 10))
           # Initialize counters for each normalized contributor
           declare -A commit_counts
           commit_counts["Garv Mehra"]=0
