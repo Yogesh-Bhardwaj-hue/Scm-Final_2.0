@@ -5,6 +5,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Entity representing a user in the system.
@@ -29,20 +30,37 @@ public class User implements Serializable {
     @Column(nullable = false, length = 255)
     private String passwordHash;
 
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dob;
 
     @Min(value = 1, message = "Age must be positive")
     @Max(value = 120, message = "Age must be less than 120")
     private Integer age;
+
+    @Size(max = 100, message = "Country name too long")
     private String country;
+
+    @Size(max = 100, message = "City name too long")
     private String city;
 
+    @Column(nullable = false)
     private LocalDateTime registrationDate;
+
+    @Size(max = 100, message = "Twitter handle too long")
     private String twitter;
+
+    @Size(max = 100, message = "LinkedIn handle too long")
     private String linkedin;
+
+    @Size(max = 100, message = "GitHub handle too long")
     private String github;
-    private Integer blogCount;
-    private Integer comments;
+
+    @Min(value = 0, message = "Blog count cannot be negative")
+    private Integer blogCount = 0;
+
+    @Min(value = 0, message = "Comments count cannot be negative")
+    private Integer comments = 0;
+
     private LocalDateTime lastLogin;
 
     // Constructors
@@ -111,11 +129,31 @@ public class User implements Serializable {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return id != null && id.equals(user.id);
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", email='" + email + '\'' +
+            ", dob=" + dob +
+            ", age=" + age +
+            ", country='" + country + '\'' +
+            ", city='" + city + '\'' +
+            ", registrationDate=" + registrationDate +
+            ", twitter='" + twitter + '\'' +
+            ", linkedin='" + linkedin + '\'' +
+            ", github='" + github + '\'' +
+            ", blogCount=" + blogCount +
+            ", comments=" + comments +
+            ", lastLogin=" + lastLogin +
+            '}';
     }
 }
