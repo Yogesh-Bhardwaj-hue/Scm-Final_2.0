@@ -135,24 +135,41 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 <!-- BLOG-ANALYTICS:START -->
 # Blog Analytics Dashboard
 
+<<<<<<< HEAD
 Last updated: Sat May  3 23:31:15 UTC 2025
+=======
+Last updated: Sun May  4 09:48:29 UTC 2025
+>>>>>>> main
 
 ## Overview
 
 📊 **Total Blog Posts:** 6
+<<<<<<< HEAD
 📝 **Total Words:** 1722
+=======
+📝 **Total Words:** 2317
+>>>>>>> main
 ⏱️ **Average Reading Time:** 1 minutes
 
 ## Popular Topics
 
 ```mermaid
 pie title Most Used Topics
+<<<<<<< HEAD
     "Java": 9
     "CSS": 5
     "Django": 7
     "JavaScript": 5
     "HTML": 7
     "Python": 5
+=======
+    "Java": 6
+    "CSS": 5
+    "Django": 6
+    "JavaScript": 3
+    "HTML": 19
+    "Python": 4
+>>>>>>> main
 ```
 <!-- BLOG-ANALYTICS:END -->
 
@@ -183,19 +200,19 @@ pie title Most Used Topics
 
 ## Visual Contribution Chart
 
-[![Contributors](https://contrib.rocks/image?repo=studentGarv/Blog_Master_Pro)](https://github.com/studentGarv/Blog_Master_Pro/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=Yogesh-Bhardwaj-hue/Scm-Final_2.0)](https://github.com/Yogesh-Bhardwaj-hue/Scm-Final_2.0/graphs/contributors)
 
 ## Contribution Breakdown
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 55
+    "Yogesh Bhardwaj": 67
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
-    "Garv Mehra": 25
+    "Garv Mehra": 34
 ```
 
-Last updated: Sat May  3 12:26:54 UTC 2025
+Last updated: Mon May  5 04:58:53 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
