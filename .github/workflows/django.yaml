@@ -5,15 +5,13 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  # Manual trigger
   workflow_dispatch:
 
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
-    
+
     services:
-      # Add database service if needed
       postgres:
         image: postgres:13
         env:
@@ -22,52 +20,52 @@ jobs:
           POSTGRES_DB: test_db
         ports:
           - 5432:5432
-        # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-        
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install django; fi
-        
-    - name: Create .env file
-      run: |
-        echo "DEBUG=True" > blogmaster_django/.env
-        echo "SECRET_KEY=github-actions-test-key" >> blogmaster_django/.env
-        echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/test_db" >> blogmaster_django/.env
-        
-    - name: Run Migrations
-      run: |
-        cd blogmaster_django
-        python manage.py makemigrations
-        python manage.py migrate
-        
-    - name: Run Tests
-      run: |
-        cd blogmaster_django
-        python manage.py test
-        
-    - name: Collect Static Files
-      run: |
-        cd blogmaster_django
-        python manage.py collectstatic --noinput
 
-              - name: Commit and Push Changes
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
         run: |
-          git config --global user.name 'studentGarv'
-          git config --global user.email 'garv1630.becse24@chitkara.edu.in'
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install django; fi
+
+      - name: Create .env file
+        run: |
+          echo "DEBUG=True" > blogmaster_django/.env
+          echo "SECRET_KEY=github-actions-test-key" >> blogmaster_django/.env
+          echo "DATABASE_URL=postgres://postgres:postgres@localhost:5432/test_db" >> blogmaster_django/.env
+
+      - name: Run Migrations
+        run: |
+          cd blogmaster_django
+          python manage.py makemigrations
+          python manage.py migrate
+
+      - name: Run Tests
+        run: |
+          cd blogmaster_django
+          python manage.py test
+
+      - name: Collect Static Files
+        run: |
+          cd blogmaster_django
+          python manage.py collectstatic --noinput
+
+      - name: Commit and Push Changes
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name 'harshit1879'
+          git config --global user.email 'harshit1879.becse24@chitkara.edu.in'
           git add README.md
           git commit -m "Update contribution charts" || echo "No changes to commit"
           git push
