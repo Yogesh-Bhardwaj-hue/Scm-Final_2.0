@@ -10,69 +10,69 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Generate Contribution Stats
         run: |
           # Create a temporary file for statistics
           echo "# Contribution Statistics" > stats.md
           echo "" >> stats.md
-          
+
           # Add visual contributor images
           echo "## Visual Contribution Chart" >> stats.md
           echo "" >> stats.md
           echo "[![Contributors](https://contrib.rocks/image?repo=${GITHUB_REPOSITORY})](https://github.com/${GITHUB_REPOSITORY}/graphs/contributors)" >> stats.md
           echo "" >> stats.md
-          
+
           # Start building the mermaid pie chart
           echo "## Contribution Breakdown" >> stats.md
           echo "" >> stats.md
           echo '```mermaid' >> stats.md
           echo "pie title Contribution by Author" >> stats.md
-          
+
           # Normalized contributor mapping
           declare -A contributor_map
           contributor_map["GARV"]="Garv Mehra"
           contributor_map["MEHRA"]="Garv Mehra"
           contributor_map["studentGarv"]="Garv Mehra"
           contributor_map["Garv"]="Garv Mehra"
-          
+
           contributor_map["Yogesh"]="Yogesh Bhardwaj"
           contributor_map["Yogesh-Bhardwaj-hue"]="Yogesh Bhardwaj"
           contributor_map["Yogesh Bhardwaj"]="Yogesh Bhardwaj"
-          
+
           contributor_map["Harshit"]="Harshit Garg"
-          contributor_map["Garg"]="Harshit Garg" 
+          contributor_map["Garg"]="Harshit Garg"
           contributor_map["harshit1879"]="Harshit Garg"
-          
+
           contributor_map["Sarthak-1818"]="Sarthak Aggarwal"
           contributor_map["Sarthak"]="Sarthak Aggarwal"
           contributor_map["Aggarwal"]="Sarthak Aggarwal"
           contributor_map["Sarthak Aggarwal"]="Sarthak Aggarwal"
-          
+
           # Initialize counters for each normalized contributor
           declare -A commit_counts
           commit_counts["Garv Mehra"]=0
           commit_counts["Yogesh Bhardwaj"]=0
           commit_counts["Harshit Garg"]=0
           commit_counts["Sarthak Aggarwal"]=0
-          
+
           # Get list of contributors and their commit counts
           CONTRIBUTORS=$(git log --format='%an' | sort -u)
-          
+
           for contributor in $CONTRIBUTORS; do
             # Skip GitHub Action commits
             if [[ "$contributor" == "GitHub"* || "$contributor" == "Action"* || "$contributor" == "." ]]; then
               continue
             fi
-            
+
             commits=$(git log --author="$contributor" --oneline | wc -l)
-            
+
             # Map to normalized name if exists
             normalized="${contributor_map[$contributor]}"
             if [ -n "$normalized" ]; then
@@ -82,19 +82,19 @@ jobs:
               commit_counts["$contributor"]=$commits
             fi
           done
-          
+
           # Output the normalized contributors to the pie chart
           for contributor in "${!commit_counts[@]}"; do
             echo "    \"$contributor\": ${commit_counts[$contributor]}" >> stats.md
           done
-          
+
           # Close the mermaid code block
           echo '```' >> stats.md
-          
+
           # Add timestamp
           echo "" >> stats.md
           echo "Last updated: $(date)" >> stats.md
-      
+
       - name: Update README with Stats
         run: |
           awk '
@@ -104,11 +104,11 @@ jobs:
           p { print }
           ' README.md > README.md.new
           mv README.md.new README.md
-      
+
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'harshit1879'
-          git config --global user.email 'harshit1879.becse24@chitkara.edu.in'
+          git config --global user.name 'studentGarv'
+          git config --global user.email 'garv1630.becse24@chitkara.edu.in'
           git add README.md
           git commit -m "Update contribution charts" || echo "No changes to commit"
           git push
