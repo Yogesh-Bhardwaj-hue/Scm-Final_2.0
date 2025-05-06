@@ -219,13 +219,13 @@ We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 169
+    "Yogesh Bhardwaj": 174
     "Harshit Garg": 66
-    "Sarthak Aggarwal": 56
+    "Sarthak Aggarwal": 57
     "Garv Mehra": 85
 ```
 
-Last updated: Tue May  6 15:06:04 UTC 2025
+Last updated: Tue May  6 15:07:39 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---
