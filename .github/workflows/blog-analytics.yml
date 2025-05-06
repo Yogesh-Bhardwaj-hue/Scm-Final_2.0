@@ -17,68 +17,75 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: '11'
-      
+
       - name: Build Java Project
         run: |
           cd blogmaster_Java
           mvn compile
-      
+
       - name: Generate Blog Analytics
         run: |
           # Create a temporary file for analytics
           echo "# Blog Analytics Dashboard" > analytics.md
           echo "" >> analytics.md
-          echo "Last updated: $(date)" >> analytics.md
+          echo "_Last updated: $(date -u)_" >> analytics.md
           echo "" >> analytics.md
-          
+
           # Run Java analytics for more detailed statistics
           cd blogmaster_Java
           mvn exec:java -Dexec.mainClass="com.blogmasterpro.BlogAnalyticsRunner" -Dexec.args="../" >> ../analytics_output.txt
           cd ..
-          
+
           # Parse the output and add to the analytics file
           if [ -f analytics_output.txt ]; then
             echo "## Overview" >> analytics.md
             echo "" >> analytics.md
-            
+
             # Extract metrics from output
             TOTAL_POSTS=$(grep "Total Posts:" analytics_output.txt | awk '{print $3}')
             TOTAL_WORDS=$(grep "Total Words:" analytics_output.txt | awk '{print $3}')
             AVG_WORDS=$(grep "Average Words per Post:" analytics_output.txt | awk '{print $5}')
-            
+
+            # Calculate average reading time (rounded up, min 1)
+            if [ -z "$AVG_WORDS" ] || [ "$AVG_WORDS" -eq 0 ]; then
+              AVG_READING_TIME=1
+            else
+              AVG_READING_TIME=$(( (AVG_WORDS + 224) / 225 ))
+            fi
+
             echo "📊 **Total Blog Posts:** $TOTAL_POSTS" >> analytics.md
             echo "📝 **Total Words:** $TOTAL_WORDS" >> analytics.md
-            echo "⏱️ **Average Reading Time:** $(($AVG_WORDS / 225)) minutes" >> analytics.md
-            
+            echo "⏱️ **Average Reading Time:** $AVG_READING_TIME minutes" >> analytics.md
+
             # Add chart for topics
             echo "" >> analytics.md
             echo "## Popular Topics" >> analytics.md
             echo "" >> analytics.md
             echo '```mermaid' >> analytics.md
             echo "pie title Most Used Topics" >> analytics.md
-            
+
             # Add topic statistics
             grep "Topic:" analytics_output.txt | while read -r line; do
               TOPIC=$(echo $line | awk '{print $2}')
               COUNT=$(echo $line | awk '{print $4}')
               echo "    \"$TOPIC\": $COUNT" >> analytics.md
             done
-            
+
             echo '```' >> analytics.md
           fi
-      
+
       - name: Update README with Analytics
         run: |
           awk '
@@ -88,8 +95,10 @@ jobs:
           p { print }
           ' README.md > README.md.new
           mv README.md.new README.md
-      
+
       - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'Yogesh-Bhardwaj-Hue'
           git config --global user.email 'yogesh1709.becse24@chitkara.edu.in'
