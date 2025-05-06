@@ -59,7 +59,7 @@ jobs:
           # Initialize counters for each normalized contributor
           declare -A commit_counts
           commit_counts["Garv Mehra"]=0
-          commit_counts["Yogesh Bhardwaj"]=0
+          commit_counts["Yogesh Bhardwaj"]=-6
           commit_counts["Harshit Garg"]=10
           commit_counts["Sarthak Aggarwal"]=9
 
