@@ -60,7 +60,7 @@ Your Ultimate Blogging Platform
 ├── login.js
 ├── profile.js
 ├── images/
-│  
+│
 | └── ... (all images and avatars)
 ├── Java/
 |── DJango/
@@ -125,7 +125,7 @@ The profile page allows users to:
 - Update their details with real-time validation
 - Logout securely
 
-**Navigation:**  
+**Navigation:**
 You can return to any other section (Home, About, etc.) using the navbar, even after entering the profile page.
 
 ---
@@ -134,18 +134,27 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 <!-- BLOG-ANALYTICS:START -->
 # Blog Analytics Dashboard
+Last updated: Sun May  4 09:48:29 UTC 2025
+>>>>>>>>> Temporary merge branch 2
 
 ## Overview
 
 📊 **Total Blog Posts:** 6
-
+📝 **Total Words:** 2317
+>>>>>>> main
 ⏱️ **Average Reading Time:** 1 minutes
 
 ## Popular Topics
 
 ```mermaid
-pie title Most Used Topics
-
+pie title Most Used Topic
+    "Java": 6
+    "CSS": 5
+    "Django": 6
+    "JavaScript": 3
+    "HTML": 19
+    "Python": 4
+>>>>>>>>> Temporary merge branch 2
 ```
 <!-- BLOG-ANALYTICS:END -->
 
@@ -188,11 +197,8 @@ pie title Contribution by Author
     "Garv Mehra": 56
 ```
 
-<<<<<<< HEAD
-Last updated: Mon May  5 04:58:53 UTC 2025
-=======
+<<<<<<<<< Temporary merge branch 1
 Last updated: Mon May  5 19:57:36 UTC 2025
->>>>>>> caba9434ca42fb6b0bfe14cb9d2c3f883d321cdd
 <!-- CONTRIBUTION-STATS:END -->
 
 ---

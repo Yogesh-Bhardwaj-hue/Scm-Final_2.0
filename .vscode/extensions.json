@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "redhat.java",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-python.python",
+        "batisteo.vscode-django"
+    ]
+}
