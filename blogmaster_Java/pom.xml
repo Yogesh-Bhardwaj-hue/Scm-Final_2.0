@@ -9,6 +9,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <!-- JUnit for testing -->
@@ -37,14 +38,24 @@
             <version>2.2.224</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- Logging (SLF4J + Simple) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <resources>
-            <!-- Include the video directory in build -->
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <!-- Optional: include video directory if needed -->
             <resource>
                 <directory>video</directory>
+                <optional>true</optional>
             </resource>
         </resources>
         <plugins>
