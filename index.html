@@ -78,6 +78,131 @@
         body.dark-mode .theme-toggle-btn {
             color: #ffd700;
         }
+
+        /* Profile section styles (move to profile.css if desired) */
+        .profile-section {
+            background: #f4f7fa;
+            padding: 40px 0;
+        }
+
+        .profile-container {
+            max-width: 420px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            padding: 36px 28px 28px 28px;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+
+        .profile-container:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 18px;
+            display: block;
+            border: 3px solid #007bff;
+            background: #e9ecef;
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .profile-info h2 {
+            margin: 0 0 10px;
+            color: #222;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .profile-info p {
+            margin: 6px 0;
+            color: #444;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+
+        .profile-actions {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .profile-actions button {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            background: #007bff;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .profile-actions button.logout {
+            background: #dc3545;
+        }
+
+        .profile-actions button:hover {
+            opacity: 0.93;
+        }
+
+        .edit-section {
+            margin-top: 22px;
+            display: none;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 18px 12px 12px 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .edit-section input {
+            width: 100%;
+            padding: 9px 10px;
+            margin-bottom: 12px;
+            border-radius: 5px;
+            border: 1px solid #bfc9d1;
+            font-size: 1rem;
+            background: #fff;
+            transition: border 0.2s;
+        }
+
+        .edit-section input:focus {
+            border: 1.5px solid #007bff;
+            outline: none;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 12px;
+            color: #28a745;
+            font-weight: 500;
+            font-size: 1.08rem;
+        }
+
+        @media (max-width: 600px) {
+            .profile-container {
+                padding: 18px 4px 18px 4px;
+            }
+
+            .profile-section {
+                padding: 18px 0;
+            }
+        }
     </style>
 </head>
 
@@ -663,133 +788,6 @@
             });
         });
     </script>
-    <style>
-        /* Add this CSS at the end of your style.css or inside a <style> tag in index.html */
-        .profile-section {
-            background: #f4f7fa;
-            padding: 40px 0;
-        }
-
-        .profile-container {
-            max-width: 420px;
-            margin: 40px auto;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
-            padding: 36px 28px 28px 28px;
-            position: relative;
-            transition: box-shadow 0.2s;
-        }
-
-        .profile-container:hover {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
-        }
-
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 18px;
-            display: block;
-            border: 3px solid #007bff;
-            background: #e9ecef;
-        }
-
-        .profile-info {
-            text-align: center;
-            margin-bottom: 18px;
-        }
-
-        .profile-info h2 {
-            margin: 0 0 10px;
-            color: #222;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .profile-info p {
-            margin: 6px 0;
-            color: #444;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-        }
-
-        .profile-actions {
-            margin-top: 18px;
-            display: flex;
-            flex-direction: row;
-            gap: 16px;
-            justify-content: center;
-        }
-
-        .profile-actions button {
-            padding: 10px 22px;
-            border: none;
-            border-radius: 6px;
-            background: #007bff;
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .profile-actions button.logout {
-            background: #dc3545;
-        }
-
-        .profile-actions button:hover {
-            opacity: 0.93;
-        }
-
-        .edit-section {
-            margin-top: 22px;
-            display: none;
-            background: #f8fafc;
-            border-radius: 8px;
-            padding: 18px 12px 12px 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .edit-section input {
-            width: 100%;
-            padding: 9px 10px;
-            margin-bottom: 12px;
-            border-radius: 5px;
-            border: 1px solid #bfc9d1;
-            font-size: 1rem;
-            background: #fff;
-            transition: border 0.2s;
-        }
-
-        .edit-section input:focus {
-            border: 1.5px solid #007bff;
-            outline: none;
-        }
-
-        .message {
-            text-align: center;
-            margin-top: 12px;
-            color: #28a745;
-            font-weight: 500;
-            font-size: 1.08rem;
-        }
-
-        @media (max-width: 600px) {
-            .profile-container {
-                padding: 18px 4px 18px 4px;
-            }
-
-            .profile-section {
-                padding: 18px 0;
-            }
-        }
-    </style>
-    >>>>>>>>> Temporary merge branch 2
 </body>
 
 </html>
