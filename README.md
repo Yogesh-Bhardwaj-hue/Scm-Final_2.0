@@ -60,7 +60,7 @@ Your Ultimate Blogging Platform
 ├── login.js
 ├── profile.js
 ├── images/
-│  
+│
 | └── ... (all images and avatars)
 ├── Java/
 |── DJango/
@@ -125,7 +125,7 @@ The profile page allows users to:
 - Update their details with real-time validation
 - Logout securely
 
-**Navigation:**  
+**Navigation:**
 You can return to any other section (Home, About, etc.) using the navbar, even after entering the profile page.
 
 ---
@@ -134,42 +134,38 @@ You can return to any other section (Home, About, etc.) using the navbar, even a
 
 <!-- BLOG-ANALYTICS:START -->
 # Blog Analytics Dashboard
-
-<<<<<<< HEAD
-Last updated: Sat May  3 23:31:15 UTC 2025
-=======
 Last updated: Sun May  4 09:48:29 UTC 2025
->>>>>>> main
+>>>>>>>>> Temporary merge branch 2
 
 ## Overview
 
 📊 **Total Blog Posts:** 6
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 📝 **Total Words:** 1722
-=======
+=========
 📝 **Total Words:** 2317
->>>>>>> main
+>>>>>>>>> Temporary merge branch 2
 ⏱️ **Average Reading Time:** 1 minutes
 
 ## Popular Topics
 
 ```mermaid
 pie title Most Used Topics
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     "Java": 9
     "CSS": 5
     "Django": 7
     "JavaScript": 5
     "HTML": 7
     "Python": 5
-=======
+=========
     "Java": 6
     "CSS": 5
     "Django": 6
     "JavaScript": 3
     "HTML": 19
     "Python": 4
->>>>>>> main
+>>>>>>>>> Temporary merge branch 2
 ```
 <!-- BLOG-ANALYTICS:END -->
 
@@ -206,13 +202,13 @@ pie title Most Used Topics
 
 ```mermaid
 pie title Contribution by Author
-    "Yogesh Bhardwaj": 67
+    "Yogesh Bhardwaj": 70
     "Harshit Garg": 5
     "Sarthak Aggarwal": 2
-    "Garv Mehra": 34
+    "Garv Mehra": 56
 ```
 
-Last updated: Mon May  5 04:58:53 UTC 2025
+Last updated: Sun May  4 10:19:38 UTC 2025
 <!-- CONTRIBUTION-STATS:END -->
 
 ---

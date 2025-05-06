@@ -900,4 +900,14 @@ footer {
     animation: zoomIn 0.6s ease-out;
 }
 
+@media (max-width: 480px) {
+    .blog-card {
+        width: 100%;
+    }
+    
+    .profile-container {
+        padding: 10px;
+    }
+}
+
 

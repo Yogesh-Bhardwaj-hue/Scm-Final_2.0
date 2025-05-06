@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,26 +21,34 @@
             --footer-bg: #222;
             --footer-text: #fff;
         }
+
         body {
             background: var(--primary-bg);
             color: var(--primary-text);
             transition: background 0.3s, color 0.3s;
         }
-        header, nav {
+
+        header,
+        nav {
             background: var(--nav-bg);
             transition: background 0.3s;
         }
-        .main-section, .profile-container, .card {
+
+        .main-section,
+        .profile-container,
+        .card {
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             transition: background 0.3s, box-shadow 0.3s;
         }
+
         footer {
             background: var(--footer-bg);
             color: var(--footer-text);
             transition: background 0.3s, color 0.3s;
         }
+
         .theme-toggle-btn {
             background: none;
             border: none;
@@ -49,9 +58,11 @@
             margin-left: 18px;
             transition: color 0.3s;
         }
+
         .theme-toggle-btn:focus {
             outline: 2px solid var(--accent);
         }
+
         /* Dark mode overrides */
         body.dark-mode {
             --primary-bg: #181a1b;
@@ -63,11 +74,13 @@
             --footer-bg: #181a1b;
             --footer-text: #f6f8fa;
         }
+
         body.dark-mode .theme-toggle-btn {
             color: #ffd700;
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav id="navbar">
@@ -141,9 +154,13 @@
         <section id="about" class="about-section">
             <div class="about-content">
                 <h2>About BlogMaster Pro</h2>
-                <p>BlogMaster Pro is your ultimate platform for creating, sharing, and discovering amazing content. We empower writers of all levels to unleash their creativity and connect with a global audience.
+                <p>BlogMaster Pro is your ultimate platform for creating, sharing, and discovering amazing content. We
+                    empower writers of all levels to unleash their creativity and connect with a global audience.
 
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit quaerat officia sit quibusdam ducimus molestias magni quos, dolore, illo alias repellendus consectetur iusto saepe illum amet minima consequuntur facilis. Maxime et, modi ab blanditiis vitae adipisci delectus libero explicabo exercitationem quae aliquid est ipsum nesciunt!
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit quaerat officia sit quibusdam
+                    ducimus molestias magni quos, dolore, illo alias repellendus consectetur iusto saepe illum amet
+                    minima consequuntur facilis. Maxime et, modi ab blanditiis vitae adipisci delectus libero explicabo
+                    exercitationem quae aliquid est ipsum nesciunt!
                 </p>
             </div>
             <div class="about-image">
@@ -151,7 +168,7 @@
             </div>
         </section>
 
-       
+
         <section id="stats" class="stats-section">
             <div class="stat-item">
                 <i class="fas fa-users"></i>
@@ -200,21 +217,23 @@
             <h2 data-aos="fade-up">Featured Blogs</h2>
             <div class="search-filter" data-aos="fade-up">
                 <form method="get" action="{% url 'blog_list' %}">
-                    <input type="text" id="search-bar" name="search" placeholder="Search blogs..." value="{{ search_query }}">
+                    <input type="text" id="search-bar" name="search" placeholder="Search blogs..."
+                        value="{{ search_query }}">
                     <select id="category-filter" name="category">
                         <option value="">All Categories</option>
                         {% for category in categories %}
-                        <option value="{{ category.name }}" {% if current_category == category.name %}selected{% endif %}>{{ category.name }}</option>
+                        <option value="{{ category.name }}" {% if current_category==category.name %}selected{% endif %}>
+                            {{ category.name }}</option>
                         {% endfor %}
                     </select>
                     <button type="submit" style="display: none;"></button>
                 </form>
             </div>
-            
+
             {% if user.is_authenticated %}
             <button id="add-blog-btn" class="add-blog-btn" data-aos="fade-up">Add New Blog</button>
             {% endif %}
-            
+
             <div id="blogs-container" class="blogs-container">
                 <!-- Simple blog posts without Django template tags -->
                 <div class="blog-post">
@@ -229,18 +248,20 @@
                 </div>
                 <!-- More blog posts -->
             </div>
-            
+
             <div class="pagination" data-aos="fade-up">
                 {% if blogs.has_previous %}
-                <a href="?page={{ blogs.previous_page_number }}&search={{ search_query }}&category={{ current_category }}">Previous</a>
+                <a
+                    href="?page={{ blogs.previous_page_number }}&search={{ search_query }}&category={{ current_category }}">Previous</a>
                 {% else %}
                 <button disabled>Previous</button>
                 {% endif %}
-                
+
                 <span id="page-numbers">Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}</span>
-                
+
                 {% if blogs.has_next %}
-                <a href="?page={{ blogs.next_page_number }}&search={{ search_query }}&category={{ current_category }}">Next</a>
+                <a
+                    href="?page={{ blogs.next_page_number }}&search={{ search_query }}&category={{ current_category }}">Next</a>
                 {% else %}
                 <button disabled>Next</button>
                 {% endif %}
@@ -258,13 +279,15 @@
                 </div>
                 <div class="testimonial">
                     <img src="./images/u1.jpg" alt="User 2">
-                    <p>"I've seen my audience grow tenfold since I started using BlogMaster Pro. Incredible platform!"</p>
+                    <p>"I've seen my audience grow tenfold since I started using BlogMaster Pro. Incredible platform!"
+                    </p>
                     <h4>Michael Chen</h4>
                     <span>Tech Enthusiast</span>
                 </div>
                 <div class="testimonial">
                     <img src="./images/u3.jpg" alt="User 3">
-                    <p>"The analytics tools have helped me understand my audience better. My engagement is at an all-time high!"</p>
+                    <p>"The analytics tools have helped me understand my audience better. My engagement is at an
+                        all-time high!"</p>
                     <h4>Emily Rodriguez</h4>
                     <span>Lifestyle Guru</span>
                 </div>
@@ -280,7 +303,8 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Starting a blog is easy! Simply sign up for an account, click on "Add New Blog," and start writing. Our intuitive editor makes it simple to create beautiful posts.</p>
+                        <p>Starting a blog is easy! Simply sign up for an account, click on "Add New Blog," and start
+                            writing. Our intuitive editor makes it simple to create beautiful posts.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -289,7 +313,8 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Yes, BlogMaster Pro offers a free plan with essential features. We also have premium plans for advanced users with additional benefits and tools.</p>
+                        <p>Yes, BlogMaster Pro offers a free plan with essential features. We also have premium plans
+                            for advanced users with additional benefits and tools.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -298,7 +323,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>BlogMaster Pro provides various monetization options, including ad integration, sponsored content opportunities, and affiliate marketing tools. Our premium plans offer advanced monetization features to maximize your earnings.</p>
+                        <p>BlogMaster Pro provides various monetization options, including ad integration, sponsored
+                            content opportunities, and affiliate marketing tools. Our premium plans offer advanced
+                            monetization features to maximize your earnings.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -307,7 +334,8 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>BlogMaster Pro offers a wide range of customizable templates and themes. You can also use our advanced design tools to create a unique look for your blog.</p>
+                        <p>BlogMaster Pro offers a wide range of customizable templates and themes. You can also use our
+                            advanced design tools to create a unique look for your blog.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -316,7 +344,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>We provide various tools to help you grow your audience, including SEO optimization, social media integration, and email marketing features. Additionally, our community features allow you to connect with other bloggers and cross-promote your content.</p>
+                        <p>We provide various tools to help you grow your audience, including SEO optimization, social
+                            media integration, and email marketing features. Additionally, our community features allow
+                            you to connect with other bloggers and cross-promote your content.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -325,7 +355,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>We offer 24/7 customer support through chat, email, and phone. Our knowledge base is also extensive, providing tutorials and guides on all aspects of blogging and using our platform.</p>
+                        <p>We offer 24/7 customer support through chat, email, and phone. Our knowledge base is also
+                            extensive, providing tutorials and guides on all aspects of blogging and using our platform.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -433,7 +465,8 @@
             <form id="add-blog-form">
                 <input type="text" id="blog-title" placeholder="Blog Title" required>
                 <input type="text" id="blog-subtitle" placeholder="Subtitle">
-                <textarea id="blog-short-desc" placeholder="Short Description (max 100 characters)" maxlength="100" required></textarea>
+                <textarea id="blog-short-desc" placeholder="Short Description (max 100 characters)" maxlength="100"
+                    required></textarea>
                 <textarea id="blog-long-desc" placeholder="Long Description" required></textarea>
                 <input type="text" id="blog-bullet-points" placeholder="Bullet Points (comma-separated)">
                 <input type="text" id="blog-youtube-link" placeholder="YouTube Video Link">
@@ -458,15 +491,11 @@
         </div>
     </div>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<<<<<<< HEAD
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="{% static 'js/login.js' %}"></script>
-    <script src="{% static 'js/profile.js' %}"></script>
-=======
+
     <script src="script.js"></script>
     <script src="login.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const toggleBtn = document.getElementById('theme-toggle');
             const icon = toggleBtn.querySelector('i');
             // Load theme from localStorage
@@ -475,7 +504,7 @@
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
             }
-            toggleBtn.addEventListener('click', function() {
+            toggleBtn.addEventListener('click', function () {
                 document.body.classList.toggle('dark-mode');
                 const isDark = document.body.classList.contains('dark-mode');
                 icon.classList.toggle('fa-moon', !isDark);
@@ -485,13 +514,13 @@
         });
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Profile navigation
             const profileNavLink = document.getElementById('profileNavLink');
             const profileSection = document.getElementById('profile-section');
             const mainSections = document.querySelectorAll('main > section');
             if (profileNavLink) {
-                profileNavLink.addEventListener('click', function(e) {
+                profileNavLink.addEventListener('click', function (e) {
                     e.preventDefault();
                     // Hide all main sections
                     mainSections.forEach(sec => sec.style.display = 'none');
@@ -535,7 +564,7 @@
                 profileAge.innerHTML = '<i class="fas fa-user"></i> Age: ' + (currentUser.age || "--");
                 profileCountry.innerHTML = '<i class="fas fa-flag"></i> Country: ' + (currentUser.country || "--");
                 profileCity.innerHTML = '<i class="fas fa-city"></i> City: ' + (currentUser.city || "--");
-                editBtn.onclick = function() {
+                editBtn.onclick = function () {
                     editSection.style.display = "block";
                     editName.value = currentUser.name || "";
                     editEmail.value = currentUser.email || "";
@@ -546,11 +575,11 @@
                     profileMsg.textContent = "";
                     profileMsg.style.color = "#28a745";
                 };
-                cancelBtn.onclick = function() {
+                cancelBtn.onclick = function () {
                     editSection.style.display = "none";
                     profileMsg.textContent = "";
                 };
-                saveBtn.onclick = function() {
+                saveBtn.onclick = function () {
                     const newName = editName.value.trim();
                     const newEmail = editEmail.value.trim();
                     const newDOB = editDOB.value;
@@ -575,27 +604,27 @@
                     }
                     users = users.map(u => {
                         if (u.email === currentUser.email) {
-                            return { 
-                                ...u, 
-                                name: newName, 
-                                email: newEmail, 
-                                dob: newDOB, 
-                                age: newAge, 
-                                country: newCountry, 
-                                city: newCity 
+                            return {
+                                ...u,
+                                name: newName,
+                                email: newEmail,
+                                dob: newDOB,
+                                age: newAge,
+                                country: newCountry,
+                                city: newCity
                             };
                         }
                         return u;
                     });
                     localStorage.setItem('users', JSON.stringify(users));
-                    const updatedUser = { 
-                        ...currentUser, 
-                        name: newName, 
-                        email: newEmail, 
-                        dob: newDOB, 
-                        age: newAge, 
-                        country: newCountry, 
-                        city: newCity 
+                    const updatedUser = {
+                        ...currentUser,
+                        name: newName,
+                        email: newEmail,
+                        dob: newDOB,
+                        age: newAge,
+                        country: newCountry,
+                        city: newCity
                     };
                     localStorage.setItem('currentUser', JSON.stringify(updatedUser));
                     profileName.textContent = newName;
@@ -608,7 +637,7 @@
                     profileMsg.textContent = "Profile updated successfully!";
                     editSection.style.display = "none";
                 };
-                logoutBtn.onclick = function() {
+                logoutBtn.onclick = function () {
                     localStorage.removeItem('currentUser');
                     window.location.href = "login.html";
                 };
@@ -618,7 +647,7 @@
             const profileSection = document.getElementById('profile-section');
             const mainSections = document.querySelectorAll('main > section');
             navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href');
                     if (targetId && targetId.startsWith('#')) {
                         // Hide all sections
@@ -640,19 +669,22 @@
             background: #f4f7fa;
             padding: 40px 0;
         }
+
         .profile-container {
             max-width: 420px;
             margin: 40px auto;
             background: #fff;
             border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
             padding: 36px 28px 28px 28px;
             position: relative;
             transition: box-shadow 0.2s;
         }
+
         .profile-container:hover {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13);
         }
+
         .profile-avatar {
             width: 100px;
             height: 100px;
@@ -663,16 +695,19 @@
             border: 3px solid #007bff;
             background: #e9ecef;
         }
+
         .profile-info {
             text-align: center;
             margin-bottom: 18px;
         }
+
         .profile-info h2 {
             margin: 0 0 10px;
             color: #222;
             font-size: 2rem;
             font-weight: 600;
         }
+
         .profile-info p {
             margin: 6px 0;
             color: #444;
@@ -682,6 +717,7 @@
             justify-content: center;
             gap: 7px;
         }
+
         .profile-actions {
             margin-top: 18px;
             display: flex;
@@ -689,6 +725,7 @@
             gap: 16px;
             justify-content: center;
         }
+
         .profile-actions button {
             padding: 10px 22px;
             border: none;
@@ -700,20 +737,24 @@
             font-weight: 500;
             transition: background 0.2s;
         }
+
         .profile-actions button.logout {
             background: #dc3545;
         }
+
         .profile-actions button:hover {
             opacity: 0.93;
         }
+
         .edit-section {
             margin-top: 22px;
             display: none;
             background: #f8fafc;
             border-radius: 8px;
             padding: 18px 12px 12px 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
+
         .edit-section input {
             width: 100%;
             padding: 9px 10px;
@@ -724,10 +765,12 @@
             background: #fff;
             transition: border 0.2s;
         }
+
         .edit-section input:focus {
             border: 1.5px solid #007bff;
             outline: none;
         }
+
         .message {
             text-align: center;
             margin-top: 12px;
@@ -735,15 +778,18 @@
             font-weight: 500;
             font-size: 1.08rem;
         }
+
         @media (max-width: 600px) {
             .profile-container {
                 padding: 18px 4px 18px 4px;
             }
+
             .profile-section {
                 padding: 18px 0;
             }
         }
     </style>
->>>>>>> main
+    >>>>>>>>> Temporary merge branch 2
 </body>
+
 </html>
