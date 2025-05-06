@@ -10,6 +10,35 @@ public class BlogAnalyticsTest {
         assertEquals(5, BlogAnalytics.countWords("This is a test blog."));
         assertEquals(0, BlogAnalytics.countWords(""));
         assertEquals(0, BlogAnalytics.countWords(null));
+        assertEquals(2, BlogAnalytics.countWords("Hello\nWorld"));
+    }
+
+    @Test
+    public void testCountSentences() {
+        assertEquals(3, BlogAnalytics.countSentences("Hello! How are you? I'm fine."));
+        assertEquals(0, BlogAnalytics.countSentences(""));
+        assertEquals(0, BlogAnalytics.countSentences(null));
+    }
+
+    @Test
+    public void testCountParagraphs() {
+        assertEquals(2, BlogAnalytics.countParagraphs("Para one.\n\nPara two."));
+        assertEquals(1, BlogAnalytics.countParagraphs("Single paragraph."));
+        assertEquals(0, BlogAnalytics.countParagraphs(""));
+    }
+
+    @Test
+    public void testMostCommonWord() {
+        assertEquals("hello", BlogAnalytics.mostCommonWord("Hello world! Hello again."));
+        assertNull(BlogAnalytics.mostCommonWord(""));
+        assertNull(BlogAnalytics.mostCommonWord(null));
+    }
+
+    @Test
+    public void testAverageWordLength() {
+        assertEquals(4.0, BlogAnalytics.averageWordLength("This test"), 0.01);
+        assertEquals(0.0, BlogAnalytics.averageWordLength(""), 0.01);
+        assertEquals(0.0, BlogAnalytics.averageWordLength(null), 0.01);
     }
 }
 
