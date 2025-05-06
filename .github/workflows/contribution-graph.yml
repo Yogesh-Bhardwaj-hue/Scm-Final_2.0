@@ -42,7 +42,7 @@ jobs:
           contributor_map["studentGarv"]="Garv Mehra"
           contributor_map["Garv"]="Garv Mehra"
 
-          contributor_map["Yogesh"]="Yogesh Bhardwaj"
+          # contributor_map["Yogesh"]="Yogesh Bhardwaj"
           contributor_map["Yogesh-Bhardwaj-hue"]="Yogesh Bhardwaj"
           contributor_map["Yogesh Bhardwaj"]="Yogesh Bhardwaj"
 
