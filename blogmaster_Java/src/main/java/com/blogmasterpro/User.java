@@ -4,13 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 /**
  * Entity representing a user in the system.
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,16 +37,27 @@ public class User {
     private String country;
     private String city;
 
-    private LocalDateTime registrationDate = LocalDateTime.now();
+    private LocalDateTime registrationDate;
     private String twitter;
     private String linkedin;
     private String github;
-    private Integer blogCount = 0;
-    private Integer comments = 0;
+    private Integer blogCount;
+    private Integer comments;
     private LocalDateTime lastLogin;
 
     // Constructors
-    public User() {}
+    public User() {
+        this.registrationDate = LocalDateTime.now();
+        this.blogCount = 0;
+        this.comments = 0;
+    }
+
+    public User(String name, String email, String passwordHash) {
+        this();
+        this.name = name;
+        this.email = email;
+        this.passwordHash = passwordHash;
+    }
 
     // Getters and setters for all fields
 
@@ -93,4 +105,17 @@ public class User {
 
     public LocalDateTime getLastLogin() { return lastLogin; }
     public void setLastLogin(LocalDateTime lastLogin) { this.lastLogin = lastLogin; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id != null && id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }
