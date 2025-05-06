@@ -2,7 +2,7 @@ name: Update Contributors Graph
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -51,6 +51,7 @@ jobs:
           contributor_map["harshit1879"]="Harshit Garg"
 
           contributor_map["Sarthak-1818"]="Sarthak Aggarwal"
+          contributor_map["sarthak-1818"]="Sarthak Aggarwal"
           contributor_map["Sarthak"]="Sarthak Aggarwal"
           contributor_map["Aggarwal"]="Sarthak Aggarwal"
           contributor_map["Sarthak Aggarwal"]="Sarthak Aggarwal"
@@ -61,7 +62,7 @@ jobs:
           commit_counts["Yogesh Bhardwaj"]=0
           commit_counts["Harshit Garg"]=0
           commit_counts["Sarthak Aggarwal"]=0
-
+          
           # Get list of contributors and their commit counts
           CONTRIBUTORS=$(git log --format='%an' | sort -u)
 
@@ -107,8 +108,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name 'studentGarv'
-          git config --global user.email 'garv1630.becse24@chitkara.edu.in'
+          git config --global user.name 'harshit1879'
+          git config --global user.email 'harshit1879.becse24@chitkara.edu.in'
           git add README.md
           git commit -m "Update contribution charts" || echo "No changes to commit"
           git push
